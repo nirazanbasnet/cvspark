@@ -164,8 +164,8 @@ export default function ScoreDetailPage() {
                             <button
                                 onClick={() => setActiveTab('score')}
                                 className={`pb-3 text-sm font-bold transition-all border-b-2 ${activeTab === 'score'
-                                        ? 'border-rose-500 text-rose-400'
-                                        : 'border-transparent text-neutral-400 hover:text-neutral-200'
+                                    ? 'border-rose-500 text-rose-400'
+                                    : 'border-transparent text-neutral-400 hover:text-neutral-200'
                                     }`}
                             >
                                 Readiness Score
@@ -173,8 +173,8 @@ export default function ScoreDetailPage() {
                             <button
                                 onClick={() => setActiveTab('jobs')}
                                 className={`pb-3 text-sm font-bold transition-all border-b-2 flex items-center gap-2 ${activeTab === 'jobs'
-                                        ? 'border-rose-500 text-rose-400'
-                                        : 'border-transparent text-neutral-400 hover:text-neutral-200'
+                                    ? 'border-rose-500 text-rose-400'
+                                    : 'border-transparent text-neutral-400 hover:text-neutral-200'
                                     }`}
                             >
                                 Job Matches
@@ -188,6 +188,7 @@ export default function ScoreDetailPage() {
                             <div className="bg-white/5 rounded-xl border border-white/10 p-6">
                                 <JobMatches
                                     resumeText={`${cv.cvData.basics.label} ${cv.cvData.basics.summary}\n\nExperience: ${cv.cvData.experience.map(e => `${e.role} at ${e.company}`).join(', ')}\n\nSkills: ${Object.values(cv.cvData.skills || {}).flat().join(', ')}`}
+                                    primaryRole={cv.cvData.basics.label || cv.cvData.experience?.[0]?.role}
                                 />
                             </div>
                         )}

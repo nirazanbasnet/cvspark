@@ -18,9 +18,10 @@ interface JobMatch {
 
 interface JobMatchesProps {
     resumeText: string;
+    primaryRole?: string;
 }
 
-export const JobMatches: React.FC<JobMatchesProps> = ({ resumeText }) => {
+export const JobMatches: React.FC<JobMatchesProps> = ({ resumeText, primaryRole }) => {
     const [matches, setMatches] = useState<JobMatch[]>([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
@@ -43,7 +44,7 @@ export const JobMatches: React.FC<JobMatchesProps> = ({ resumeText }) => {
             const response = await fetch('/api/match-jobs', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ resumeText }),
+                body: JSON.stringify({ resumeText, primaryRole }),
             });
 
             if (!response.ok) {

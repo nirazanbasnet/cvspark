@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { Groq } from 'groq-sdk';
 import jobsData from '../../../data/jobs.json';
+import { scrapeLinkedInJobs } from '@/lib/linkedinScraper';
 
 const groq = new Groq({
     apiKey: process.env.GROQ_API_KEY,
@@ -8,7 +9,7 @@ const groq = new Groq({
 
 export async function POST(req: Request) {
     try {
-        const { resumeText } = await req.json();
+        const { resumeText, primaryRole } = await req.json();
 
         if (!resumeText) {
             return NextResponse.json(
@@ -24,9 +25,21 @@ export async function POST(req: Request) {
             );
         }
 
+        // Fetch dynamic LinkedIn jobs if a role is provided
+        let allJobs = [...jobsData];
+        if (primaryRole) {
+            try {
+                const linkedInJobs = await scrapeLinkedInJobs(primaryRole, 'Nepal', 10);
+                allJobs = [...linkedInJobs, ...allJobs];
+            } catch (err) {
+                console.error("Failed to scrape LinkedIn jobs dynamically:", err);
+                // Keep moving, fallback jobs from JSON are still available
+            }
+        }
+
         // Prepare a concise version of the jobs for the prompt
         // We only send id, title, company, and description to reduce token usage
-        const promptJobs = jobsData.map((job) => ({
+        const promptJobs = allJobs.map((job) => ({
             id: job.id,
             title: job.title,
             company: job.company,
@@ -85,7 +98,7 @@ Return ONLY the JSON.`,
 
         // Hydrate the matches with the full job data
         const enrichedMatches = matches.map((match: any) => {
-            const fullJobData = jobsData.find((j) => j.id === match.jobId);
+            const fullJobData = allJobs.find((j) => j.id === match.jobId);
             return {
                 ...match,
                 job: fullJobData,
