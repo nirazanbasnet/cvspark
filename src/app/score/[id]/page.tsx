@@ -6,6 +6,7 @@ import { useCvContext } from "@/context/CvContext";
 import { ArrowLeft, ArrowRight, Loader2, RefreshCw } from "lucide-react";
 import { ResumeViewer } from "@/components/dashboard/ResumeViewer";
 import { MarketReadinessScore } from "@/components/dashboard/MarketReadinessScore";
+import { JobMatches } from "@/components/dashboard/JobMatches";
 
 export default function ScoreDetailPage() {
     const params = useParams();
@@ -13,6 +14,7 @@ export default function ScoreDetailPage() {
     const router = useRouter();
     const { cvs, isLoaded, getPdfBlob, updateFullCv } = useCvContext();
     const [isReanalyzing, setIsReanalyzing] = useState(false);
+    const [activeTab, setActiveTab] = useState<'score' | 'jobs'>('score');
 
     const cv = cvs.find(c => c.id === id);
 
@@ -155,10 +157,40 @@ export default function ScoreDetailPage() {
                     <ResumeViewer cvData={cv.cvData} />
                 </div>
 
-                {/* Right Pane - Only Market Readiness Score */}
+                {/* Right Pane - Content */}
                 <div className="w-full lg:w-1/2 h-full bg-neutral-950 border-l border-white/5 shadow-[-10px_0_30px_rgba(0,0,0,0.5)] z-10 relative overflow-y-auto p-6 md:p-10 custom-scrollbar flex items-start justify-center pt-8 pb-32">
-                    <div className="w-full max-w-xl">
-                        <MarketReadinessScore analysisData={cv.analysisData} />
+                    <div className="w-full flex flex-col gap-6">
+                        <div className="flex space-x-6 border-b border-white/10 w-full px-2">
+                            <button
+                                onClick={() => setActiveTab('score')}
+                                className={`pb-3 text-sm font-bold transition-all border-b-2 ${activeTab === 'score'
+                                        ? 'border-rose-500 text-rose-400'
+                                        : 'border-transparent text-neutral-400 hover:text-neutral-200'
+                                    }`}
+                            >
+                                Readiness Score
+                            </button>
+                            <button
+                                onClick={() => setActiveTab('jobs')}
+                                className={`pb-3 text-sm font-bold transition-all border-b-2 flex items-center gap-2 ${activeTab === 'jobs'
+                                        ? 'border-rose-500 text-rose-400'
+                                        : 'border-transparent text-neutral-400 hover:text-neutral-200'
+                                    }`}
+                            >
+                                Job Matches
+                                <span className="bg-rose-500/20 text-rose-400 py-0.5 px-2 rounded-full text-[10px] font-black tracking-wider">NEW</span>
+                            </button>
+                        </div>
+
+                        {activeTab === 'score' ? (
+                            <MarketReadinessScore analysisData={cv.analysisData} />
+                        ) : (
+                            <div className="bg-white/5 rounded-xl border border-white/10 p-6">
+                                <JobMatches
+                                    resumeText={`${cv.cvData.basics.label} ${cv.cvData.basics.summary}\n\nExperience: ${cv.cvData.experience.map(e => `${e.role} at ${e.company}`).join(', ')}\n\nSkills: ${Object.values(cv.cvData.skills || {}).flat().join(', ')}`}
+                                />
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>
