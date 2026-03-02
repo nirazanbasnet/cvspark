@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { useCvContext } from "@/context/CvContext";
 import { ArrowLeft, ArrowRight, Loader2, RefreshCw } from "lucide-react";
+import { SignedIn, SignedOut, SignInButton } from "@clerk/nextjs";
 import { ResumeViewer } from "@/components/dashboard/ResumeViewer";
 import { MarketReadinessScore } from "@/components/dashboard/MarketReadinessScore";
 import { JobMatches } from "@/components/dashboard/JobMatches";
@@ -140,12 +141,21 @@ export default function ScoreDetailPage() {
                         {isReanalyzing ? <Loader2 className="w-4 h-4 animate-spin text-rose-500" /> : <RefreshCw className="w-4 h-4 text-rose-500" />}
                         {isReanalyzing ? "Analyzing..." : "Re-Analyze Score"}
                     </button>
-                    <button
-                        onClick={() => router.push(`/builder?id=${cv.id}`)}
-                        className="bg-rose-500 text-white font-semibold text-sm px-4 py-2 rounded-lg flex items-center gap-2 hover:bg-rose-600 transition-colors"
-                    >
-                        Edit CV in Builder <ArrowRight className="w-4 h-4" />
-                    </button>
+                    <SignedIn>
+                        <button
+                            onClick={() => router.push(`/builder?id=${cv.id}`)}
+                            className="bg-rose-500 text-white font-semibold text-sm px-4 py-2 rounded-lg flex items-center gap-2 hover:bg-rose-600 transition-colors shadow-sm"
+                        >
+                            Edit CV in Builder <ArrowRight className="w-4 h-4" />
+                        </button>
+                    </SignedIn>
+                    <SignedOut>
+                        <SignInButton mode="modal" signUpFallbackRedirectUrl={`/builder?id=${cv.id}`}>
+                            <button className="bg-rose-500 text-white font-semibold text-sm px-4 py-2 rounded-lg flex items-center gap-2 hover:bg-rose-600 transition-colors shadow-sm">
+                                Login to Edit CV <ArrowRight className="w-4 h-4" />
+                            </button>
+                        </SignInButton>
+                    </SignedOut>
                 </div>
             </header>
 
