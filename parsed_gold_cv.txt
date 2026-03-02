@@ -1,0 +1,195 @@
+
+
+Bikram Tuladhar 
+ Email: bikramtuladhar2011@gmail.com 
+  Mobile: +977 9808110947 
+github.com/bikramtuladhar   
+linkedin.com/in/bikramtuladhar   
+ 
+Professional Summary 
+ 
+Software Engineer and DevOps Engineer with over 7 years of experience in web application development 
+and infrastructure optimization. Proficient in PHP, JavaScript, and Python, specializing in frameworks like 
+Laravel  and  Vue.js.  Demonstrated  ability  to  lead  major  migrations  and  upgrades,  optimize  deployment 
+processes  and  enhance  system  performance.  Experienced  in  managing  development  teams,  ensuring 
+code quality, and delivering scalable, high-quality solutions that meet stakeholder expectations. 
+ 
+EDUCATION 
+AIMS International College  Lalitpur, Nepal 
+Bachelor's Degree in Computer Science   (2019 - 2024)  
+Awaiting results 
+   
+Phulchowki College  Lalitpur, Nepal 
+Higher Education  (2016 - 2018) 
+   
+Thapathali Campus  Kathmandu Nepal 
+Diploma in Computer Engineering   (2009 - 2012) 
+ 
+ 
+SKILLS SUMMARY 
+ 
+• Programming Languages: PHP, JavaScript, Python, SQL, Bash 
+• Frameworks & Libraries: Laravel, Vue.js, Nuxt.js, ReactJS, Django, Flask, FastAPI, Express.js, 
+Hono 
+• DevOps & Tools: 
+o CI/CD & Automation: Git, GitLab, Jenkins, Bitbucket CI/CD, Terraform, Helm 
+o Testing & Quality Assurance: PHPUnit, JMeter, SonarQube, PHPStan, Snyk, ESLint, 
+Pint, Husky 
+o Containerization & Orchestration: Docker, Kubernetes 
+o Monitoring & Logging: Prometheus, Sentry, Inspector 
+o Security: Tenable Nessus, Nginx ModSecurity, pfSense 
+o Cloud Services: AWS, Google Cloud Platform, Azure, Oracle Cloud, DigitalOcean 
+o Other Tools: MinIO, Mailpit, JSReport, Netmaker, Teleport, XtraBackup 
+• Databases & Storage: MySQL, PostgreSQL, Redis 
+• Version Control: Git, GitLab, Bitbucket, Github 
+• Web Servers & Networking: Nginx, Apache, Asterisk (VoIP configurations) 
+ 
+ 
+  
+
+PROFESSIONAL EXPERIENCE 
+ 
+Software Engineer / DevOps 
+Jobins Co Jp | LINK 
+ October 2022 – Present 
+ 
+Laravel Mix to Vite Migration & Version Upgrades: 
+ 
+• Led the migration of Laravel Mix to Vite in Laravel 8, backporting Laravel View class methods 
+for compatibility. 
+• Spearheaded the upgrade from Laravel 8 to 10 and PHP 8 to 8.1, utilizing tools like Rector 
+for seamless codebase transition. 
+• Managed the introduction of automated linting using Pint and ESLint in local environments 
+(Husky) and Bitbucket CI/CD pipelines. 
+ 
+Testing, Optimization & Tooling: 
+ 
+• Directed and streamlined PHPUnit testing, contributing over 300 test cases to ensure stability 
+and boost confidence during upgrades. 
+• Implemented JMeter load testing to identify system bottlenecks, resolving them via caching 
+and dynamic programming techniques. 
+• Improved Webpack build times by leveraging caching and optimizing the inclusion of only 
+necessary files and folders. 
+• Executed custom activity tracking on a ReactJS project using native browser features such 
+as sendBeacon. 
+• Led the implementation of SonarQube for code quality scanning, initiating the resolution of 
+issues identified. 
+ 
+Team Leadership & Feature Implementation: 
+ 
+• Led a team of 5 developers, assisting with database design, architecture planning, and 
+implementing features like rating systems using moving averages. 
+• Managed the migration of file-based sessions to Redis via a database intermediary, 
+improving system performance and scalability. 
+• Introduced PHPStan for static analysis and began refactoring legacy code to reduce technical 
+debt. 
+ 
+AI & Performance Enhancements: 
+ 
+• Developed an AI-powered bot using OpenAI to automate form-filling for long forms. 
+ 
+Database & Infrastructure Upgrades: 
+ 
+• Led the database upgrade from MySQL 5.7 to 8, modernizing deprecated SQL functions to 
+ensure compatibility. 
+• Optimized the overall system through load testing and performance enhancements like 
+caching and database query improvements. 
+ 
+  
+
+DevOps Works 
+ 
+• Reduced Bitbucket pipeline time by 66%, optimizing frontend compilation and deployment 
+processes 
+• Integrated Laravel Horizon for queue management, enhancing job processing and monitoring 
+• Implemented debugging solutions like Inspector and improved system performance through 
+JMeter load testing 
+• Enhanced system security with tools like Tenable Nessus and Nginx ModSecurity 
+• Deployed and showcased Netmaker and Teleport for secure remote access and VPN 
+solutions 
+• Improved system scalability by configuring separate databases for read/write operations 
+• Automated PHPUnit tests for PR events and integrated PHPStan for improved code quality 
+• Integrated MinIO as S3-compatible storage for scalable object storage solutions 
+• Deployed Mailpit to facilitate email testing in development environments 
+• Configured JSReport for automated PDF generation, streamlining reporting tasks 
+• Automated MySQL database cloning using XtraBackup and Docker for efficient backup and 
+recovery 
+• Implemented self-hosted Sentry for issue tracking and reporting, enhancing visibility on code 
+errors 
+• Set up pfSense for robust firewall management and secure networking 
+• Managed internal DNS using Technitium DNS for streamlined domain name resolution 
+ 
+ 
+Engineering Manager / DevOps Engineer 
+| YoungInnovations Pvt. Ltd. | LINK 
+ December 2017 – June 2023 
+ 
+Laravel & VueJS Development: 
+ 
+• Developed a Laravel module to facilitate the import and export of translation files using Excel, 
+enabling translators to work more efficiently. Automated the appending of missing translations by 
+searching for translation keys within the codebase and maintaining language files. 
+• Led and delivered a database application using VueJS and Laravel for the Federation of Nepali 
+Journalists, designed to collect incident data. 
+• Created dynamic multi-step forms in VueJS using Vue Store for efficient state management. 
+• Built a dynamic form generator that converts Excel-based table forms into web forms by copy-
+pasting into a content-editable area, widely adopted by local government websites in Nepal. 
+ 
+Legacy Framework & Python Projects: 
+ 
+• Maintained and enhanced legacy YII framework applications by adding new features, such as 
+reporting with raw SQL and integration with SMS gateways and VoIP services. 
+• Contributed to a Python-based project (Invenio) by upgrading it to the latest version and importing 
+large volumes of digital books for ICIMOD Nepal. 
+• Developed features for a VoIP-based project using VueJS and Django, including SMS 
+scheduling, automated voice calls, and advanced Asterisk dial plan configurations. 
+ 
+Testing & QA: 
+ 
+
+• Authored comprehensive test cases to ensure reliability and functionality for a Django project 
+developed for COVID-19 emergency procurement. 
+ 
+DevOps Work 
+ 
+• Automated multi-cloud platform deployments for ASP.NET projects, streamlining processes. 
+• Managed migration of legacy systems to new cloud providers, minimizing downtime and ensuring 
+operational stability. 
+• Migrated GitLab to a Docker environment with automated backups, improving data integrity. 
+• Led server migration and dockerization efforts for the Himaldoc system, significantly enhancing 
+performance. 
+• Architected cloud infrastructure for MAMAknowsBest on Google Cloud, ensuring secure, scalable 
+operations. 
+• Moved legacy hosting to kubernetes to save cost more than 50%. 
+• Gained experience working on a wide variety of projects using technologies such as Node.js, 
+Django, Laravel, ASP.NET, WordPress, and Drupal. 
+• Started as an intern and advanced through multiple roles, ultimately being promoted to 
+Engineering Manager. 
+ 
+ 
+OPEN SOURCE PROJECTS 
+ 
+• DNS Record Comparator | LINK 
+Bash script for comparing DNS configurations across servers to identify discrepancies. 
+ 
+• Fork All Starred repo | LINK 
+Script to fork all starred repositories on GitHub and sync upstream changes. 
+ 
+• Jira daily task extractor | LINK 
+Tool to log daily tasks from Jira issues automatically. 
+ 
+• MYSQL Clonner | LINK 
+Automated MySQL cloning using xtrabackup for fast and efficient backups. 
+ 
+• Meilisearch server creator | LINK 
+Script to automate Meilisearch server creation. 
+ 
+• AWS IP Mover | LINK 
+Automated tool for migrating IPs between instances in AWS. 
+ 
+ 
+LANGUAGES 
+• English 
+• Hindi 
+• Nepali 
+ 

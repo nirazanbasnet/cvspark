@@ -7,6 +7,7 @@ import { GoldStandardResume } from "@/types/resume";
 
 export interface AnalysisData {
     score: number;
+    averageMarketScore: number;
     roleCategory: string;
     marketFitSummary: string;
     categories: {
@@ -14,7 +15,11 @@ export interface AnalysisData {
         score: number;
         sourceCited?: string;
         good: string[];
-        improvements: string[];
+        improvements: Array<{
+            originalText: string;
+            recommendedText: string;
+            reasoning: string;
+        }>;
     }[];
 }
 

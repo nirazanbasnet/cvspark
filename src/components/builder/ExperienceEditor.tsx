@@ -1,7 +1,7 @@
 "use client";
 
 import { GoldStandardResume } from "@/types/resume";
-import { Briefcase, Plus, Trash2, Wand2, Loader2, Sparkles, ChevronDown, ChevronUp } from "lucide-react";
+import { Briefcase, Plus, Trash2, Wand2, Loader2, Sparkles, ChevronDown, ChevronUp, Bot } from "lucide-react";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 
@@ -33,7 +33,7 @@ export function ExperienceEditor({
         setLiveCvData({
             ...liveCvData,
             experience: [
-                { role: "", company: "", duration: "", bullets: [""] },
+                { role: "", company: "", duration: "", bullets: [] },
                 ...liveCvData.experience
             ]
         });
@@ -67,6 +67,41 @@ export function ExperienceEditor({
                     newExp[expIndex].focusAreas![areaIndex].bullets[bulletIndex] = data.suggestion;
                 } else if (newExp[expIndex].bullets) {
                     newExp[expIndex].bullets![bulletIndex] = data.suggestion;
+                }
+                setLiveCvData({ ...liveCvData, experience: newExp });
+            }
+        } catch (err) {
+            console.error(err);
+        } finally {
+            setLoadingIndices(prev => ({ ...prev, [loadingKey]: false }));
+        }
+    };
+
+    const handleSuggest = async (expIndex: number, areaIndex: number | null) => {
+        const exp = liveCvData.experience[expIndex];
+        const role = exp.role || "Professional";
+        const taskHeading = areaIndex !== null && exp.focusAreas ? exp.focusAreas[areaIndex].heading : "";
+
+        const existingBullets = areaIndex !== null && exp.focusAreas ? exp.focusAreas[areaIndex].bullets : (exp.bullets || []);
+
+        const loadingKey = `${expIndex}-${areaIndex}-suggest`;
+        setLoadingIndices(prev => ({ ...prev, [loadingKey]: true }));
+
+        try {
+            const res = await fetch("/api/suggest-bullet", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ role, taskHeading, existingBullets }),
+            });
+            const data = await res.json();
+
+            if (data.suggestion) {
+                const newExp = [...liveCvData.experience];
+                if (areaIndex !== null && newExp[expIndex].focusAreas) {
+                    newExp[expIndex].focusAreas![areaIndex].bullets.push(data.suggestion);
+                } else {
+                    if (!newExp[expIndex].bullets) newExp[expIndex].bullets = [];
+                    newExp[expIndex].bullets!.push(data.suggestion);
                 }
                 setLiveCvData({ ...liveCvData, experience: newExp });
             }
@@ -238,12 +273,27 @@ export function ExperienceEditor({
                                                     )
                                                 })}
                                             </div>
-                                            <button
-                                                onClick={() => addBullet(expIndex, null)}
-                                                className="mt-2 w-full py-2.5 border border-dashed border-white/10 rounded-xl text-neutral-500 text-sm font-medium hover:border-white/30 hover:text-neutral-300 transition-all flex justify-center items-center gap-2"
-                                            >
-                                                <Plus className="w-4 h-4" /> Add Bullet
-                                            </button>
+                                            <div className="flex gap-2 mt-2">
+                                                <button
+                                                    onClick={() => handleSuggest(expIndex, null)}
+                                                    disabled={loadingIndices[`${expIndex}-null-suggest`]}
+                                                    className="flex-1 py-3 bg-indigo-500/10 border border-indigo-500/30 rounded-xl text-indigo-300 text-sm font-bold hover:bg-indigo-500 hover:text-white transition-all flex justify-center items-center gap-2 disabled:opacity-50"
+                                                >
+                                                    {loadingIndices[`${expIndex}-null-suggest`] ? (
+                                                        <Loader2 className="w-4 h-4 animate-spin" />
+                                                    ) : (
+                                                        <Bot className="w-4 h-4" />
+                                                    )}
+                                                    {(!exp.bullets || exp.bullets.length === 0) ? "AI Suggest Starting Bullet" : "AI Suggest Another Bullet"}
+                                                </button>
+                                                <button
+                                                    onClick={() => addBullet(expIndex, null)}
+                                                    className="w-12 flex justify-center items-center rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 transition-all text-neutral-400"
+                                                    title="Add Manual Bullet"
+                                                >
+                                                    <Plus className="w-5 h-5" />
+                                                </button>
+                                            </div>
                                         </div>
                                     )}
 
@@ -307,12 +357,27 @@ export function ExperienceEditor({
                                                     )
                                                 })}
                                             </div>
-                                            <button
-                                                onClick={() => addBullet(expIndex, areaIndex)}
-                                                className="mt-2 w-full py-2 border border-dashed border-white/10 rounded-xl text-neutral-500 text-sm font-medium hover:border-white/30 hover:text-neutral-300 transition-all flex justify-center items-center gap-2"
-                                            >
-                                                <Plus className="w-4 h-4" /> Add Bullet to {area.heading || "Task"}
-                                            </button>
+                                            <div className="flex gap-2 mt-2">
+                                                <button
+                                                    onClick={() => handleSuggest(expIndex, areaIndex)}
+                                                    disabled={loadingIndices[`${expIndex}-${areaIndex}-suggest`]}
+                                                    className="flex-1 py-2 bg-indigo-500/10 border border-indigo-500/30 rounded-xl text-indigo-300 text-sm font-bold hover:bg-indigo-500 hover:text-white transition-all flex justify-center items-center gap-2 disabled:opacity-50"
+                                                >
+                                                    {loadingIndices[`${expIndex}-${areaIndex}-suggest`] ? (
+                                                        <Loader2 className="w-4 h-4 animate-spin" />
+                                                    ) : (
+                                                        <Bot className="w-4 h-4" />
+                                                    )}
+                                                    {(!area.bullets || area.bullets.length === 0) ? "AI Suggest Bullet" : "AI Suggest More"}
+                                                </button>
+                                                <button
+                                                    onClick={() => addBullet(expIndex, areaIndex)}
+                                                    className="px-4 flex justify-center items-center rounded-xl bg-black/40 border border-white/10 hover:bg-white/10 transition-all text-neutral-400"
+                                                    title="Add Manual Bullet"
+                                                >
+                                                    <Plus className="w-4 h-4" />
+                                                </button>
+                                            </div>
                                         </div>
                                     ))}
 
@@ -320,7 +385,7 @@ export function ExperienceEditor({
                                         onClick={() => {
                                             const newExp = [...liveCvData.experience];
                                             if (!newExp[expIndex].focusAreas) newExp[expIndex].focusAreas = [];
-                                            newExp[expIndex].focusAreas!.push({ heading: "", bullets: [""] });
+                                            newExp[expIndex].focusAreas!.push({ heading: "", bullets: [] });
                                             setLiveCvData({ ...liveCvData, experience: newExp });
                                         }}
                                         className="mt-6 w-full py-3 border border-dashed border-rose-500/30 rounded-xl text-rose-400 text-sm font-bold hover:bg-rose-500/10 hover:border-rose-500/50 transition-all flex justify-center items-center gap-2 bg-rose-500/5"

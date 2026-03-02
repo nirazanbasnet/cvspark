@@ -13,8 +13,10 @@ export async function POST(req: Request) {
         const prompt = `
 You are an expert executive resume writer.
 The user has provided their professional experience background below in JSON form.
-Your task is to write a highly compelling, ATS-optimized "Professional Summary" paragraph (exactly 3-4 sentences long) that perfectly captures their career trajectory, key skills, and greatest impacts based *only* on the provided experience.
-Do not use generic buzzwords; focus on concrete achievements and technologies mentioned.
+Your task is to write a highly compelling, ATS-optimized "Professional Summary" paragraph.
+CRITICAL CONSTRAINT: The summary MUST be strictly between 50 and 80 words long. This is a hard limit.
+It should perfectly capture their career trajectory, key skills, and greatest impacts based *only* on the provided experience.
+Do not use generic buzzwords; focus on concrete achievements, leadership qualities, and core technologies mentioned.
 
 Return ONLY the plain text summary. Do not include quotes, prefixes, or conversational text.
 
@@ -29,7 +31,7 @@ ${JSON.stringify(experience, null, 2)}
             ],
             model: "llama-3.3-70b-versatile",
             temperature: 0.3,
-            max_tokens: 200,
+            max_tokens: 400,
         });
 
         const summary = completion.choices[0]?.message?.content?.trim();
