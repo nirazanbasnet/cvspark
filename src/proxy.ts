@@ -7,7 +7,7 @@ const isPublicRoute = createRouteMatcher([
     "/api/(.*)"
 ]);
 
-export default clerkMiddleware(async (auth, request) => {
+export const proxy = clerkMiddleware(async (auth, request) => {
     if (!isPublicRoute(request)) {
         // Protect all other routes (like /builder, /dashboard)
         await auth.protect();
