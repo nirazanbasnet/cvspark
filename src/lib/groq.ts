@@ -7,7 +7,7 @@ export const groq = new Groq({
 export const ANALYSIS_PROMPT = `
 You are an expert technical recruiter and AI-driven resume analyst.
 Analyze the user's CV provided below. You have two critical tasks:
-1. Evaluate the CV against the "Gold Standard Benchmark" (based on Bikram Tuladhar's CV format: highly visible metrics, robust quantified achievements, action-driven bullet points, and clean technical categorization).
+1. Evaluate the CV against the "Gold Standard Benchmark" (based on sample CV format: highly visible metrics, robust quantified achievements, action-driven bullet points, and clean technical categorization).
 2. Extract the user's information faithfully into a highly structured JSON schema that will be used to generate an ATS-optimized resume.
 
 ### Gold Standard Rules

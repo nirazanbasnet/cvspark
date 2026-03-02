@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { Groq } from 'groq-sdk';
-import jobsData from '../../../data/jobs.json';
-import { scrapeLinkedInJobs } from '@/lib/linkedinScraper';
+import fs from 'fs';
+import path from 'path';
 
 const groq = new Groq({
     apiKey: process.env.GROQ_API_KEY,
@@ -25,21 +25,18 @@ export async function POST(req: Request) {
             );
         }
 
-        // Fetch dynamic LinkedIn jobs if a role is provided
-        let allJobs = [...jobsData];
-        if (primaryRole) {
-            try {
-                const linkedInJobs = await scrapeLinkedInJobs(primaryRole, 'Nepal', 10);
-                allJobs = [...linkedInJobs, ...allJobs];
-            } catch (err) {
-                console.error("Failed to scrape LinkedIn jobs dynamically:", err);
-                // Keep moving, fallback jobs from JSON are still available
-            }
+        // Dynamically read the jobs database to get the freshest background-scraped data
+        let allJobs = [];
+        try {
+            const JOBS_FILE = path.join(process.cwd(), 'src/data/jobs.json');
+            allJobs = JSON.parse(fs.readFileSync(JOBS_FILE, 'utf-8'));
+        } catch (e) {
+            console.error("Failed to read jobs.json:", e);
         }
 
         // Prepare a concise version of the jobs for the prompt
         // We only send id, title, company, and description to reduce token usage
-        const promptJobs = allJobs.map((job) => ({
+        const promptJobs = allJobs.map((job: any) => ({
             id: job.id,
             title: job.title,
             company: job.company,
@@ -53,8 +50,8 @@ export async function POST(req: Request) {
                     content: `You are an expert technical recruiter and AI job matching assistant. Your task is to evaluate a candidate's resume against a list of open job positions.
           
 Compare the provided resume against the provided jobs. Calculate a match percentage (0-100) based on skills, experience, and role alignment.
-Return a valid JSON array of the top matching jobs, sorted highest percentage to lowest.
-Include ONLY jobs with a match percentage > 30%. Limit to top 5 jobs max.
+Return a valid JSON array of all matching jobs, sorted highest percentage to lowest.
+Include ONLY jobs with a match percentage > 0%. (No arbitrary limit, return as many as possible).
 
 The JSON MUST follow this exact schema:
 {
@@ -98,7 +95,7 @@ Return ONLY the JSON.`,
 
         // Hydrate the matches with the full job data
         const enrichedMatches = matches.map((match: any) => {
-            const fullJobData = allJobs.find((j) => j.id === match.jobId);
+            const fullJobData = allJobs.find((j: any) => j.id === match.jobId);
             return {
                 ...match,
                 job: fullJobData,

@@ -1,6 +1,6 @@
 import { GoldStandardResume } from "@/types/resume";
 
-export const bikramGoldStandard: GoldStandardResume = {
+export const sampleGoldStandard: GoldStandardResume = {
     basics: {
         name: "Bikram Tuladhar",
         label: "Software Engineer / DevOps",

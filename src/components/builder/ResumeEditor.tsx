@@ -48,7 +48,7 @@ export function ResumeEditor({ bullets, setBullets }: { bullets: string[], setBu
                         <Sparkles className="w-5 h-5 text-amber-400" />
                         Impact-First Experience Builder
                     </h2>
-                    <p className="text-sm text-neutral-400 mt-1">Draft your accomplishments. We'll optimize them into the "Bikram Formula".</p>
+                    <p className="text-sm text-neutral-400 mt-1">Draft your accomplishments. We'll optimize them into the "Sample Formula".</p>
                 </div>
             </div>
 
@@ -67,7 +67,7 @@ export function ResumeEditor({ bullets, setBullets }: { bullets: string[], setBu
                                 onClick={() => handleImprove(idx)}
                                 disabled={loadingIndex === idx || bullet.length < 5}
                                 className="p-3 bg-indigo-500/20 text-indigo-300 hover:bg-indigo-500 hover:text-white rounded-xl transition-all disabled:opacity-50 border border-indigo-500/30 hover:shadow-[0_0_15px_rgba(99,102,241,0.5)]"
-                                title="AI Improve (Bikram Formula)"
+                                title="AI Improve (Sample Formula)"
                             >
                                 {loadingIndex === idx ? <Loader2 className="w-5 h-5 animate-spin" /> : <Wand2 className="w-5 h-5" />}
                             </button>

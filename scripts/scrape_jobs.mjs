@@ -156,8 +156,7 @@ async function main() {
   allJobs = [...mjJobs, ...kjJobs];
 
   if (allJobs.length === 0) {
-    console.log('Scraping failed or yielded 0 jobs. Using fallback data to ensure system has testable data.');
-    allJobs = fallbackJobs;
+    console.log('\nScraping failed or yielded 0 jobs. jobs.json will reflect an empty array.');
   }
 
   fs.mkdirSync(path.dirname(JOBS_FILE), { recursive: true });

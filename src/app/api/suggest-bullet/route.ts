@@ -3,7 +3,7 @@ import { groq } from "@/lib/groq";
 
 const SUGGESTION_PROMPT = `
 You are an elite Technical Ghostwriter and strict Resume Expert.
-The user needs a single, brand new, highly professional resume bullet point. The bullet must be written using the strict "Bikram Formula":
+The user needs a single, brand new, highly professional resume bullet point. The bullet must be written using the strict "Sample Formula":
 [Action Verb] + [Specific Technology/Process] + [Quantifiable Result/Optimization/Impact].
 
 You will be provided with the user's Job Title (and optionally a specific Task/Project Area they are working on), as well as any bullets they already have for this role.

@@ -3,7 +3,7 @@ import { groq } from "@/lib/groq";
 
 const GHOSTWRITER_PROMPT = `
 You are an elite Technical Ghostwriter and strict Resume Expert.
-Your task is to rewrite the user's job experience bullet point using the strict "Bikram Formula":
+Your task is to rewrite the user's job experience bullet point using the strict "Sample Formula":
 [Action Verb] + [Specific Technology] + [Quantifiable Result/Optimization].
 
 Example 1:

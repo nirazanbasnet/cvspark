@@ -1,7 +1,7 @@
 const fs = require('fs');
 const pdf = require('pdf-parse');
 
-let dataBuffer = fs.readFileSync('sample-cv/bikram-tuladhar-cv.pdf');
+let dataBuffer = fs.readFileSync('sample-cv/sample-cv.pdf');
 
 pdf(dataBuffer).then(function(data) {
     console.log(data.text);

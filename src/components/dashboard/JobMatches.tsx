@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Briefcase, Building2, MapPin, Loader2, ExternalLink, ChevronRight, X } from 'lucide-react';
+import { Briefcase, Building2, MapPin, ExternalLink } from 'lucide-react';
+import { SignedIn, SignedOut, SignInButton, useAuth } from '@clerk/nextjs';
 
 interface JobMatch {
     jobId: string;
@@ -27,11 +28,13 @@ export const JobMatches: React.FC<JobMatchesProps> = ({ resumeText, primaryRole 
     const [error, setError] = useState<string | null>(null);
     const [hasScanned, setHasScanned] = useState(false);
 
+    const { isSignedIn, isLoaded } = useAuth();
+
     React.useEffect(() => {
-        if (resumeText && !hasScanned && !loading) {
+        if (isLoaded && isSignedIn && resumeText && !hasScanned && !loading) {
             fetchMatches();
         }
-    }, [resumeText, hasScanned]);
+    }, [resumeText, hasScanned, isSignedIn, isLoaded]);
 
     const fetchMatches = async () => {
         if (!resumeText) return;
@@ -81,86 +84,103 @@ export const JobMatches: React.FC<JobMatchesProps> = ({ resumeText, primaryRole 
 
             </div>
 
-            {hasScanned && (
-                <div className="space-y-4 pt-2">
-                    <div className="flex justify-between items-center bg-slate-50 p-3 rounded-lg border border-slate-200">
-                        <span className="text-sm font-medium text-slate-700">
-                            {loading ? 'Scanning top job portals...' : `Found ${matches.length} strong matches based on your profile.`}
-                        </span>
-                    </div>
+            <SignedOut>
+                <div className="text-center p-8 bg-slate-50 rounded-xl border border-slate-200 mt-4">
+                    <Briefcase className="h-10 w-10 text-slate-400 mx-auto mb-3" />
+                    <h3 className="text-lg font-semibold text-slate-700">Login Required</h3>
+                    <p className="text-slate-500 text-sm mt-1 mb-5 max-w-md mx-auto">
+                        You need to login to use the feature below and unlock your personalized job matches.
+                    </p>
+                    <SignInButton mode="modal">
+                        <button className="bg-rose-500 text-white font-semibold text-sm px-6 py-2.5 rounded-lg hover:bg-rose-600 transition-colors shadow-sm inline-flex items-center gap-2">
+                            Login to View Matches
+                        </button>
+                    </SignInButton>
+                </div>
+            </SignedOut>
 
-                    {error && (
-                        <div className="p-4 bg-red-50 text-red-700 rounded-lg border border-red-200 text-sm">
-                            {error}
+            <SignedIn>
+                {hasScanned && (
+                    <div className="space-y-4 pt-2">
+                        <div className="flex justify-between items-center bg-slate-50 p-3 rounded-lg border border-slate-200">
+                            <span className="text-sm font-medium text-slate-700">
+                                {loading ? 'Scanning top job portals...' : `Found ${matches.length} strong matches based on your profile.`}
+                            </span>
                         </div>
-                    )}
 
-                    {!loading && !error && matches.length === 0 && (
-                        <div className="text-center p-8 bg-slate-50 rounded-xl border border-slate-200">
-                            <Briefcase className="h-10 w-10 text-slate-400 mx-auto mb-3" />
-                            <h3 className="text-lg font-semibold text-slate-700">No strong matches right now</h3>
-                            <p className="text-slate-500 text-sm mt-1 max-w-md mx-auto">
-                                We couldn't find available jobs that closely align with your current resume. Check back later or adjust your resume targeting.
-                            </p>
-                        </div>
-                    )}
+                        {error && (
+                            <div className="p-4 bg-red-50 text-red-700 rounded-lg border border-red-200 text-sm">
+                                {error}
+                            </div>
+                        )}
 
-                    <div className="grid gap-4 md:grid-cols-2">
-                        {matches.map((match, idx) => (
-                            <div key={`${match.jobId}-${idx}`} className="flex flex-col overflow-hidden hover:border-primary/50 transition-colors border-slate-200 border rounded-xl bg-white shadow-sm">
-                                <div className="p-4 pb-3 border-b border-slate-100 bg-slate-50/50">
-                                    <div className="flex justify-between items-start gap-4">
-                                        <div>
-                                            <h3 className="text-lg font-bold leading-tight mb-1 text-slate-800">
-                                                {match.job?.title || 'Unknown Position'}
-                                            </h3>
-                                            <p className="flex items-center gap-1.5 text-slate-600 text-sm">
-                                                <Building2 className="h-3.5 w-3.5" />
-                                                {match.job?.company || 'Unknown Company'}
+                        {!loading && !error && matches.length === 0 && (
+                            <div className="text-center p-8 bg-slate-50 rounded-xl border border-slate-200">
+                                <Briefcase className="h-10 w-10 text-slate-400 mx-auto mb-3" />
+                                <h3 className="text-lg font-semibold text-slate-700">No strong matches right now</h3>
+                                <p className="text-slate-500 text-sm mt-1 max-w-md mx-auto">
+                                    We couldn't find available jobs that closely align with your current resume. Check back later or adjust your resume targeting.
+                                </p>
+                            </div>
+                        )}
+
+                        <div className="grid gap-4 md:grid-cols-2">
+                            {matches.map((match, idx) => (
+                                <div key={`${match.jobId}-${idx}`} className="flex flex-col overflow-hidden hover:border-primary/50 transition-colors border-slate-200 border rounded-xl bg-white shadow-sm">
+                                    <div className="p-4 pb-3 border-b border-slate-100 bg-slate-50/50">
+                                        <div className="flex justify-between items-start gap-4">
+                                            <div>
+                                                <h3 className="text-lg font-bold leading-tight mb-1 text-slate-800">
+                                                    {match.job?.title || 'Unknown Position'}
+                                                </h3>
+                                                <p className="flex items-center gap-1.5 text-slate-600 text-sm">
+                                                    <Building2 className="h-3.5 w-3.5" />
+                                                    {match.job?.company || 'Unknown Company'}
+                                                </p>
+                                            </div>
+                                            <span className={`inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 ${getPercentageColor(match.matchPercentage)}`}>
+                                                {match.matchPercentage}% Match
+                                            </span>
+                                        </div>
+
+                                        <div className="flex items-center gap-3 mt-3 text-xs text-slate-500">
+                                            <span className="flex items-center gap-1"><MapPin className="h-3 w-3" /> {match.job?.location || 'Nepal'}</span>
+                                            <span className="px-1.5 py-0.5 bg-slate-100 rounded text-[10px] font-medium uppercase tracking-wider">{match.job?.source}</span>
+                                        </div>
+                                    </div>
+
+                                    <div className="p-4 pt-4 flex-1">
+                                        <div className="mb-4">
+                                            <h4 className="text-xs font-semibold uppercase tracking-wider text-rose-500 mb-1.5">Why it's a match</h4>
+                                            <p className="text-sm text-slate-700 bg-rose-50 p-3 rounded-md border border-rose-100 leading-relaxed">
+                                                {match.reason}
                                             </p>
                                         </div>
-                                        <span className={`inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 ${getPercentageColor(match.matchPercentage)}`}>
-                                            {match.matchPercentage}% Match
-                                        </span>
+
+                                        <div>
+                                            <h4 className="text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1.5">Job Overview</h4>
+                                            <p className="text-sm text-slate-600 line-clamp-3 leading-relaxed">
+                                                {match.job?.description}
+                                            </p>
+                                        </div>
                                     </div>
 
-                                    <div className="flex items-center gap-3 mt-3 text-xs text-slate-500">
-                                        <span className="flex items-center gap-1"><MapPin className="h-3 w-3" /> {match.job?.location || 'Nepal'}</span>
-                                        <span className="px-1.5 py-0.5 bg-slate-100 rounded text-[10px] font-medium uppercase tracking-wider">{match.job?.source}</span>
-                                    </div>
-                                </div>
-
-                                <div className="p-4 pt-4 flex-1">
-                                    <div className="mb-4">
-                                        <h4 className="text-xs font-semibold uppercase tracking-wider text-rose-500 mb-1.5">Why it's a match</h4>
-                                        <p className="text-sm text-slate-700 bg-rose-50 p-3 rounded-md border border-rose-100 leading-relaxed">
-                                            {match.reason}
-                                        </p>
-                                    </div>
-
-                                    <div>
-                                        <h4 className="text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1.5">Job Overview</h4>
-                                        <p className="text-sm text-slate-600 line-clamp-3 leading-relaxed">
-                                            {match.job?.description}
-                                        </p>
+                                    <div className="flex items-center pt-3 pb-4 px-6 border-t border-slate-100 bg-slate-50/50 mt-auto">
+                                        <a
+                                            href={match.job?.link || '#'}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="w-full text-center flex items-center justify-center gap-2 bg-white border border-slate-200 hover:bg-slate-50 hover:border-slate-300 text-slate-700 font-medium py-2 rounded-md transition-all text-sm"
+                                        >
+                                            View Full Details & Apply <ExternalLink className="h-3.5 w-3.5" />
+                                        </a>
                                     </div>
                                 </div>
-
-                                <div className="flex items-center pt-3 pb-4 px-6 border-t border-slate-100 bg-slate-50/50 mt-auto">
-                                    <a
-                                        href={match.job?.link || '#'}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="w-full text-center flex items-center justify-center gap-2 bg-white border border-slate-200 hover:bg-slate-50 hover:border-slate-300 text-slate-700 font-medium py-2 rounded-md transition-all text-sm"
-                                    >
-                                        View Full Details & Apply <ExternalLink className="h-3.5 w-3.5" />
-                                    </a>
-                                </div>
-                            </div>
-                        ))}
+                            ))}
+                        </div>
                     </div>
-                </div>
-            )}
+                )}
+            </SignedIn>
         </div>
     );
 };

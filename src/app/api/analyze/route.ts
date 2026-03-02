@@ -52,6 +52,50 @@ export async function POST(req: Request) {
         const resultString = completion.choices[0]?.message?.content || "{}";
         const result = JSON.parse(resultString);
 
+        // --- BACKGROUND SCRAPER (Fire-and-forget) ---
+        // Pre-warm the jobs database with 20 relevant jobs for this specific user's role
+        const role = result.analysis?.roleCategory;
+        if (role) {
+            void (async () => {
+                try {
+                    console.log(`[Background] Initiating async scrape for 20 jobs matching role: ${role}`);
+
+                    const { scrapeLinkedInJobs } = await import("@/lib/linkedinScraper");
+                    const fs = await import("fs");
+                    const path = await import("path");
+
+                    // Scrape 20 jobs
+                    const scrapedJobs = await scrapeLinkedInJobs(role, 'Nepal', 20);
+
+                    if (scrapedJobs.length > 0) {
+                        const JOBS_FILE = path.join(process.cwd(), 'src/data/jobs.json');
+                        let existingJobs: any[] = [];
+
+                        try {
+                            if (fs.existsSync(JOBS_FILE)) {
+                                existingJobs = JSON.parse(fs.readFileSync(JOBS_FILE, 'utf-8'));
+                            }
+                        } catch (e) {
+                            console.error("[Background] Failed to read existing jobs:", e);
+                        }
+
+                        // Merge scraped jobs with existing, removing duplicates by ID
+                        const allJobs = [...scrapedJobs, ...existingJobs];
+                        const uniqueJobs = Array.from(new Map(allJobs.map(j => [j.id, j])).values());
+
+                        // Ensure directory exists
+                        fs.mkdirSync(path.dirname(JOBS_FILE), { recursive: true });
+                        fs.writeFileSync(JOBS_FILE, JSON.stringify(uniqueJobs, null, 2), 'utf-8');
+
+                        console.log(`[Background] Successfully injected ${scrapedJobs.length} new jobs into jobs.json for role: ${role}`);
+                    }
+                } catch (e) {
+                    console.error("[Background] Async scrape failed:", e);
+                }
+            })();
+        }
+        // --------------------------------------------
+
         return NextResponse.json(result);
     } catch (error: any) {
         console.error("Error analyzing CV:", error);
