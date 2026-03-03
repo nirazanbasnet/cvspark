@@ -10,7 +10,8 @@
   --color-amber-500: #f59e0b;
   --color-neutral-950: #0a0a0a;
   
-  --font-sans: "Inter", "Roboto", system-ui, sans-serif;
+  --font-sans: var(--font-sans), "Inter", "Roboto", system-ui, sans-serif;
+  --font-serif: var(--font-serif), "Playfair Display", "Georgia", serif;
 }
 
 body {
@@ -21,6 +22,13 @@ body {
 @layer utilities {
   .custom-scrollbar::-webkit-scrollbar {
     width: 6px;
+  }
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .hide-scrollbar {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
   }
   .custom-scrollbar::-webkit-scrollbar-track {
     background: transparent;

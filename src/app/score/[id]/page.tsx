@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { useCvContext } from "@/context/CvContext";
-import { ArrowLeft, ArrowRight, Loader2, RefreshCw } from "lucide-react";
+import { ArrowLeft, ArrowRight, Loader2, RefreshCw, FileText, LayoutDashboard, Briefcase, ChevronRight, Trash2 } from "lucide-react";
 import { SignedIn, SignedOut, SignInButton } from "@clerk/nextjs";
 import { ResumeViewer } from "@/components/dashboard/ResumeViewer";
 import { MarketReadinessScore } from "@/components/dashboard/MarketReadinessScore";
@@ -15,7 +15,7 @@ export default function ScoreDetailPage() {
     const router = useRouter();
     const { cvs, isLoaded, getPdfBlob, updateFullCv } = useCvContext();
     const [isReanalyzing, setIsReanalyzing] = useState(false);
-    const [activeTab, setActiveTab] = useState<'score' | 'jobs'>('score');
+    const [activeTab, setActiveTab] = useState<'score' | 'jobs' | 'resume'>('score');
 
     const cv = cvs.find(c => c.id === id);
 
@@ -111,8 +111,8 @@ export default function ScoreDetailPage() {
 
     return (
         <main className="min-h-screen bg-neutral-950 text-white font-sans flex flex-col h-screen overflow-hidden">
-            {/* Header */}
-            <header className="flex-none h-16 border-b border-white/5 bg-neutral-900/50 px-6 flex items-center justify-between z-50">
+            {/* Topbar */}
+            <header className="flex-none h-16 border-b border-white/5 bg-neutral-900/50 px-6 pr-14 flex items-center justify-between z-50">
                 <div className="flex items-center gap-4">
                     <button
                         onClick={() => router.push("/")}
@@ -136,7 +136,7 @@ export default function ScoreDetailPage() {
                     <button
                         onClick={handleReanalyze}
                         disabled={isReanalyzing}
-                        className="bg-transparent border border-white/20 text-neutral-300 font-semibold text-sm px-4 py-2 rounded-lg flex items-center gap-2 hover:bg-white/5 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="bg-transparent border border-white/20 text-neutral-300 font-semibold text-sm px-4 py-2 rounded-lg flex items-center gap-2 hover:bg-white/5 transition-colors disabled:opacity-50 disabled:cursor-not-allowed hidden md:flex"
                     >
                         {isReanalyzing ? <Loader2 className="w-4 h-4 animate-spin text-rose-500" /> : <RefreshCw className="w-4 h-4 text-rose-500" />}
                         {isReanalyzing ? "Analyzing..." : "Re-Analyze Score"}
@@ -146,62 +146,102 @@ export default function ScoreDetailPage() {
                             onClick={() => router.push(`/builder?id=${cv.id}`)}
                             className="bg-rose-500 text-white font-semibold text-sm px-4 py-2 rounded-lg flex items-center gap-2 hover:bg-rose-600 transition-colors shadow-sm"
                         >
-                            Edit CV in Builder <ArrowRight className="w-4 h-4" />
+                            Edit CV <span className="hidden md:inline">in Builder</span> <ArrowRight className="w-4 h-4" />
                         </button>
                     </SignedIn>
                     <SignedOut>
                         <SignInButton mode="modal" signUpFallbackRedirectUrl={`/builder?id=${cv.id}`}>
                             <button className="bg-rose-500 text-white font-semibold text-sm px-4 py-2 rounded-lg flex items-center gap-2 hover:bg-rose-600 transition-colors shadow-sm">
-                                Login to Edit CV <ArrowRight className="w-4 h-4" />
+                                Login <span className="hidden md:inline">to Edit CV</span> <ArrowRight className="w-4 h-4" />
                             </button>
                         </SignInButton>
                     </SignedOut>
                 </div>
             </header>
 
-            {/* Split UI */}
-            <div className="flex-1 flex flex-col lg:flex-row overflow-hidden relative">
+            {/* Dashboard Layout */}
+            <div className="flex-1 flex overflow-hidden relative">
 
-                {/* Left Pane - Resume Viewer (Replaces old Dashboard) */}
-                <div className="w-full lg:w-1/2 h-full overflow-y-auto p-6 md:p-10 custom-scrollbar pb-32 bg-black/40">
-                    <ResumeViewer cvData={cv.cvData} />
-                </div>
+                {/* Left Sidebar Menu */}
+                <aside className="w-72 border-r border-white/5 bg-neutral-900/30 flex-col hidden md:flex z-20 shadow-[10px_0_30px_rgba(0,0,0,0.5)]">
+                    <div className="p-4 flex flex-col gap-2 mt-4">
+                        <button onClick={() => setActiveTab('score')} className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-colors ${activeTab === 'score' ? 'bg-rose-500/10 text-rose-400' : 'text-neutral-400 hover:text-neutral-200 hover:bg-white/5'}`}>
+                            <LayoutDashboard className="w-5 h-5" /> Readiness Score
+                        </button>
+                        <button onClick={() => setActiveTab('jobs')} className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-colors ${activeTab === 'jobs' ? 'bg-rose-500/10 text-rose-400' : 'text-neutral-400 hover:text-neutral-200 hover:bg-white/5'}`}>
+                            <Briefcase className="w-5 h-5" /> Job Matches <span className="ml-auto bg-rose-500/20 text-rose-400 py-0.5 px-2 rounded-full text-[10px] font-black tracking-wider">NEW</span>
+                        </button>
+                        <button onClick={() => setActiveTab('resume')} className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-colors ${activeTab === 'resume' ? 'bg-rose-500/10 text-rose-400' : 'text-neutral-400 hover:text-neutral-200 hover:bg-white/5'}`}>
+                            <FileText className="w-5 h-5" /> Original Resume
+                        </button>
+                    </div>
 
-                {/* Right Pane - Content */}
-                <div className="w-full lg:w-1/2 h-full bg-neutral-950 border-l border-white/5 shadow-[-10px_0_30px_rgba(0,0,0,0.5)] z-10 relative overflow-y-auto p-6 md:p-10 custom-scrollbar flex items-start justify-center pt-8 pb-32">
-                    <div className="w-full flex flex-col gap-6">
-                        <div className="flex space-x-6 border-b border-white/10 w-full px-2">
-                            <button
-                                onClick={() => setActiveTab('score')}
-                                className={`pb-3 text-sm font-bold transition-all border-b-2 ${activeTab === 'score'
-                                    ? 'border-rose-500 text-rose-400'
-                                    : 'border-transparent text-neutral-400 hover:text-neutral-200'
-                                    }`}
-                            >
-                                Readiness Score
-                            </button>
-                            <button
-                                onClick={() => setActiveTab('jobs')}
-                                className={`pb-3 text-sm font-bold transition-all border-b-2 flex items-center gap-2 ${activeTab === 'jobs'
-                                    ? 'border-rose-500 text-rose-400'
-                                    : 'border-transparent text-neutral-400 hover:text-neutral-200'
-                                    }`}
-                            >
-                                Job Matches
-                                <span className="bg-rose-500/20 text-rose-400 py-0.5 px-2 rounded-full text-[10px] font-black tracking-wider">NEW</span>
-                            </button>
+                    {/* Recent Documents Section */}
+                    {cvs.length > 0 && (
+                        <div className="mt-8 flex-1 flex flex-col overflow-hidden">
+                            <h3 className="px-6 text-xs font-bold text-neutral-500 uppercase tracking-wider mb-4">Recent Documents</h3>
+                            <div className="flex-1 overflow-y-auto px-4 pb-6 custom-scrollbar flex flex-col gap-2">
+                                {cvs.map(recentCv => (
+                                    <div
+                                        key={recentCv.id}
+                                        onClick={() => router.push(`/score/${recentCv.id}`)}
+                                        className={`bg-white/5 border px-4 py-3 rounded-xl cursor-pointer transition-all group relative overflow-hidden flex flex-col gap-1 ${recentCv.id === id ? 'border-rose-500/40 bg-rose-500/5' : 'border-white/10 hover:border-white/20 hover:bg-white/10'}`}
+                                    >
+                                        <div className="flex items-start justify-between">
+                                            <h4 className={`text-sm font-semibold truncate pr-6 ${recentCv.id === id ? 'text-rose-400' : 'text-white group-hover:text-rose-300'}`}>
+                                                {recentCv.fileName}
+                                            </h4>
+                                            <ChevronRight className={`w-4 h-4 shrink-0 transition-transform group-hover:translate-x-1 ${recentCv.id === id ? 'text-rose-400' : 'text-neutral-500'}`} />
+                                        </div>
+                                        <div className="flex items-center justify-between mt-1">
+                                            <p className="text-[11px] text-neutral-400">
+                                                {new Date(recentCv.uploadDate).toLocaleDateString()}
+                                            </p>
+                                            {recentCv.analysisData?.score && (
+                                                <span className="text-[11px] font-bold text-emerald-400 bg-emerald-400/10 px-2 py-0.5 rounded-full">
+                                                    {recentCv.analysisData.score}/100
+                                                </span>
+                                            )}
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    )}
+                </aside>
+
+                {/* Main Content Area */}
+                <div className="flex-1 overflow-y-auto p-4 md:p-8 lg:p-12 custom-scrollbar bg-neutral-950/80">
+                    <div className="h-full w-full flex flex-col pt-2 pb-32">
+
+                        {/* Mobile Tab Nav (Hidden on md+) */}
+                        <div className="flex md:hidden space-x-6 mb-8 overflow-x-auto pb-2 border-b border-white/10 flex-nowrap hide-scrollbar">
+                            <button onClick={() => setActiveTab('score')} className={`whitespace-nowrap pb-3 text-sm font-bold transition-all border-b-2 ${activeTab === 'score' ? 'border-rose-500 text-rose-400' : 'border-transparent text-neutral-400 hover:text-neutral-200'}`}>Readiness Score</button>
+                            <button onClick={() => setActiveTab('jobs')} className={`whitespace-nowrap flex items-center gap-2 pb-3 text-sm font-bold transition-all border-b-2 ${activeTab === 'jobs' ? 'border-rose-500 text-rose-400' : 'border-transparent text-neutral-400 hover:text-neutral-200'}`}>Job Matches <span className="bg-rose-500/20 text-rose-400 py-0.5 px-1.5 rounded-full text-[9px] font-black tracking-wider">NEW</span></button>
+                            <button onClick={() => setActiveTab('resume')} className={`whitespace-nowrap pb-3 text-sm font-bold transition-all border-b-2 ${activeTab === 'resume' ? 'border-rose-500 text-rose-400' : 'border-transparent text-neutral-400 hover:text-neutral-200'}`}>Original Resume</button>
                         </div>
 
-                        {activeTab === 'score' ? (
-                            <MarketReadinessScore analysisData={cv.analysisData} />
-                        ) : (
-                            <div className="bg-white/5 rounded-xl border border-white/10 p-6">
-                                <JobMatches
-                                    resumeText={`${cv.cvData.basics.label} ${cv.cvData.basics.summary}\n\nExperience: ${cv.cvData.experience.map(e => `${e.role} at ${e.company}`).join(', ')}\n\nSkills: ${Object.values(cv.cvData.skills || {}).flat().join(', ')}`}
-                                    primaryRole={cv.cvData.basics.label || cv.cvData.experience?.[0]?.role}
-                                />
-                            </div>
-                        )}
+                        <div className="flex-1 w-full animate-in fade-in zoom-in-95 duration-300">
+                            {activeTab === 'score' && (
+                                <MarketReadinessScore analysisData={cv.analysisData} />
+                            )}
+
+                            {activeTab === 'jobs' && (
+                                <div className="bg-white/5 rounded-2xl border border-white/10 p-6 md:p-8 shadow-2xl">
+                                    <JobMatches
+                                        resumeText={`${cv.cvData.basics.label} ${cv.cvData.basics.summary}\n\nExperience: ${cv.cvData.experience.map(e => `${e.role} at ${e.company}`).join(', ')}\n\nSkills: ${Object.values(cv.cvData.skills || {}).flat().join(', ')}`}
+                                        primaryRole={cv.cvData.basics.label || cv.cvData.experience?.[0]?.role}
+                                    />
+                                </div>
+                            )}
+
+                            {activeTab === 'resume' && (
+                                <div className="h-full min-h-[80vh] bg-black/40 rounded-2xl border border-white/10 overflow-hidden shadow-2xl">
+                                    <ResumeViewer cvData={cv.cvData} />
+                                </div>
+                            )}
+                        </div>
+
                     </div>
                 </div>
             </div>

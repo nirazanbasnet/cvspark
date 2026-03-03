@@ -161,7 +161,7 @@ function BuilderContent() {
                 <div className="w-full xl:w-1/2 bg-neutral-200 overflow-hidden flex flex-col relative border-l border-neutral-800/10">
 
                     {/* Preview Context Bar */}
-                    <div className="h-14 bg-white border-b border-neutral-300 flex items-center justify-between px-4 z-10 shadow-sm shrink-0">
+                    <div className="h-14 bg-white border-b border-neutral-300 flex items-center justify-between px-4 pr-14 z-10 shadow-sm shrink-0">
                         <div className="flex items-center gap-2">
                             {originalPdfUrl && (
                                 <button

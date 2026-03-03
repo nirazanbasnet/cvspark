@@ -70,7 +70,7 @@ export const JobMatches: React.FC<JobMatchesProps> = ({ resumeText, primaryRole 
     };
 
     return (
-        <div className="mt-8">
+        <div>
             <div className="flex items-center justify-between mb-4">
                 <div>
                     <h2 className="text-xl font-bold flex items-center gap-2">

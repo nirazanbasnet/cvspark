@@ -1,5 +1,185 @@
 [
   {
+    "id": "li-1772471700966-0",
+    "title": "React/Next.JS Front-End Developer",
+    "company": "Frontline Data Solutions",
+    "location": "Nepal",
+    "link": "https://np.linkedin.com/jobs/view/react-next-js-front-end-developer-at-frontline-data-solutions-4378499549?position=1&pageNum=0&refId=fbtIdRd%2FZppUOGikEQ7Cag%3D%3D&trackingId=7fmJYz7IVlAyzMWZqx%2Flkg%3D%3D",
+    "description": "LinkedIn Job: React/Next.JS Front-End Developer at Frontline Data Solutions",
+    "source": "linkedin.com"
+  },
+  {
+    "id": "li-1772471700966-1",
+    "title": "Angular Developer Intern",
+    "company": "WeFlow Agency",
+    "location": "Lalitpur District, Nepal",
+    "link": "https://np.linkedin.com/jobs/view/angular-developer-intern-at-weflow-agency-4378253938?position=2&pageNum=0&refId=fbtIdRd%2FZppUOGikEQ7Cag%3D%3D&trackingId=kbiM3c5dgcQZ7PrtOA7Wyw%3D%3D",
+    "description": "LinkedIn Job: Angular Developer Intern at WeFlow Agency",
+    "source": "linkedin.com"
+  },
+  {
+    "id": "li-1772471700966-2",
+    "title": "Junior React.js Developer (Fresher)",
+    "company": "Froglake Innovations And Technology Pvt. Ltd.",
+    "location": "Nepal",
+    "link": "https://np.linkedin.com/jobs/view/junior-react-js-developer-fresher-at-froglake-innovations-and-technology-pvt-ltd-4378273164?position=3&pageNum=0&refId=fbtIdRd%2FZppUOGikEQ7Cag%3D%3D&trackingId=BoE3jgNPzng1fCia2LQMYw%3D%3D",
+    "description": "LinkedIn Job: Junior React.js Developer (Fresher) at Froglake Innovations And Technology Pvt. Ltd.",
+    "source": "linkedin.com"
+  },
+  {
+    "id": "li-1772471700966-3",
+    "title": "Full Stack Developer with AI Experience",
+    "company": "Ascendifly",
+    "location": "Bagmati Rural Municipality, Nepal",
+    "link": "https://np.linkedin.com/jobs/view/full-stack-developer-with-ai-experience-at-ascendifly-4372239625?position=4&pageNum=0&refId=fbtIdRd%2FZppUOGikEQ7Cag%3D%3D&trackingId=l8DlfNqIuT3DSgCV%2BrPHgg%3D%3D",
+    "description": "LinkedIn Job: Full Stack Developer with AI Experience at Ascendifly",
+    "source": "linkedin.com"
+  },
+  {
+    "id": "li-1772471700966-4",
+    "title": "Full Stack Software Engineer",
+    "company": "Chapter One",
+    "location": "Nepal",
+    "link": "https://np.linkedin.com/jobs/view/full-stack-software-engineer-at-chapter-one-4360782802?position=5&pageNum=0&refId=fbtIdRd%2FZppUOGikEQ7Cag%3D%3D&trackingId=5d7nlgcnBiIa5XedOjQoHA%3D%3D",
+    "description": "LinkedIn Job: Full Stack Software Engineer at Chapter One",
+    "source": "linkedin.com"
+  },
+  {
+    "id": "li-1772471700966-5",
+    "title": "Web Developer",
+    "company": "Hybrid",
+    "location": "Kathmandu District, Nepal",
+    "link": "https://np.linkedin.com/jobs/view/web-developer-at-hybrid-4372484531?position=6&pageNum=0&refId=fbtIdRd%2FZppUOGikEQ7Cag%3D%3D&trackingId=kmnU2FZXEqHuJIfSPE6MUg%3D%3D",
+    "description": "LinkedIn Job: Web Developer at Hybrid",
+    "source": "linkedin.com"
+  },
+  {
+    "id": "li-1772471700966-6",
+    "title": "Fullstack Engineer - React / Next.js / Python (m/f/*)",
+    "company": "Ultra Tendency",
+    "location": "Kathmandu, Bāgmatī, Nepal",
+    "link": "https://np.linkedin.com/jobs/view/fullstack-engineer-react-next-js-python-m-f-at-ultra-tendency-4377269141?position=7&pageNum=0&refId=fbtIdRd%2FZppUOGikEQ7Cag%3D%3D&trackingId=1x7gMpPoMahu5KM5e%2FSr9Q%3D%3D",
+    "description": "LinkedIn Job: Fullstack Engineer - React / Next.js / Python (m/f/*) at Ultra Tendency",
+    "source": "linkedin.com"
+  },
+  {
+    "id": "li-1772471700966-7",
+    "title": "Intern Full Stack Developer",
+    "company": "Koulier",
+    "location": "Kathmandu, Bāgmatī, Nepal",
+    "link": "https://np.linkedin.com/jobs/view/intern-full-stack-developer-at-koulier-4357561007?position=8&pageNum=0&refId=fbtIdRd%2FZppUOGikEQ7Cag%3D%3D&trackingId=d3r0vO%2F598qG5lQ1j7CeZQ%3D%3D",
+    "description": "LinkedIn Job: Intern Full Stack Developer at Koulier",
+    "source": "linkedin.com"
+  },
+  {
+    "id": "li-1772471700966-8",
+    "title": "Full Stack Developer .Net+React+AWS/Azure",
+    "company": "WeFlow Agency",
+    "location": "Kathmandu, Bāgmatī, Nepal",
+    "link": "https://np.linkedin.com/jobs/view/full-stack-developer-net%2Breact%2Baws-azure-at-weflow-agency-4370286925?position=9&pageNum=0&refId=fbtIdRd%2FZppUOGikEQ7Cag%3D%3D&trackingId=ecdTVYIzI4eRsTJy%2BTSNew%3D%3D",
+    "description": "LinkedIn Job: Full Stack Developer .Net+React+AWS/Azure at WeFlow Agency",
+    "source": "linkedin.com"
+  },
+  {
+    "id": "li-1772471700966-9",
+    "title": "Full Stack Developer (ASP.NET WebForms)",
+    "company": "Frontline Data Solutions",
+    "location": "Nepal",
+    "link": "https://np.linkedin.com/jobs/view/full-stack-developer-asp-net-webforms-at-frontline-data-solutions-4377021156?position=10&pageNum=0&refId=fbtIdRd%2FZppUOGikEQ7Cag%3D%3D&trackingId=SkZXsX63IgHsL%2F4sQgqjZA%3D%3D",
+    "description": "LinkedIn Job: Full Stack Developer (ASP.NET WebForms) at Frontline Data Solutions",
+    "source": "linkedin.com"
+  },
+  {
+    "id": "li-1772471700966-10",
+    "title": "Mid-Level Software Developer (Laravel)",
+    "company": "Codewing Solutions",
+    "location": "Kathmandu, Bāgmatī, Nepal",
+    "link": "https://np.linkedin.com/jobs/view/mid-level-software-developer-laravel-at-codewing-solutions-4371965578?position=11&pageNum=0&refId=fbtIdRd%2FZppUOGikEQ7Cag%3D%3D&trackingId=4dxiILCLkMVoFeLB2GVBkw%3D%3D",
+    "description": "LinkedIn Job: Mid-Level Software Developer (Laravel) at Codewing Solutions",
+    "source": "linkedin.com"
+  },
+  {
+    "id": "li-1772471700966-11",
+    "title": "Senior NodeJS Developer",
+    "company": "EB Pearls",
+    "location": "Kathmandu, Bāgmatī, Nepal",
+    "link": "https://np.linkedin.com/jobs/view/senior-nodejs-developer-at-eb-pearls-4264346133?position=12&pageNum=0&refId=fbtIdRd%2FZppUOGikEQ7Cag%3D%3D&trackingId=%2FcAvPHtt0Ai7Ra%2FNWsdSjQ%3D%3D",
+    "description": "LinkedIn Job: Senior NodeJS Developer at EB Pearls",
+    "source": "linkedin.com"
+  },
+  {
+    "id": "li-1772471700966-12",
+    "title": "Full-Stack Java Developer",
+    "company": "Ledelsea",
+    "location": "Nepal",
+    "link": "https://np.linkedin.com/jobs/view/full-stack-java-developer-at-ledelsea-4369784439?position=13&pageNum=0&refId=fbtIdRd%2FZppUOGikEQ7Cag%3D%3D&trackingId=zeAv7Hsh1k%2BSzK5iCCLuuA%3D%3D",
+    "description": "LinkedIn Job: Full-Stack Java Developer at Ledelsea",
+    "source": "linkedin.com"
+  },
+  {
+    "id": "li-1772471700966-13",
+    "title": "Back End Developer",
+    "company": "Maitri Services",
+    "location": "Lalitpur District, Nepal",
+    "link": "https://np.linkedin.com/jobs/view/back-end-developer-at-maitri-services-4368565436?position=14&pageNum=0&refId=fbtIdRd%2FZppUOGikEQ7Cag%3D%3D&trackingId=HB8oUUuAzdzToOKiSdtscg%3D%3D",
+    "description": "LinkedIn Job: Back End Developer at Maitri Services",
+    "source": "linkedin.com"
+  },
+  {
+    "id": "li-1772471700966-14",
+    "title": "Senior Full Stack Engineer (.NET & Vue/React) - Fully Remote - CET Timezone",
+    "company": "CoverGo | Insurtech",
+    "location": "Pokhara, Gandakī, Nepal",
+    "link": "https://np.linkedin.com/jobs/view/senior-full-stack-engineer-net-vue-react-fully-remote-cet-timezone-at-covergo-insurtech-4342107321?position=15&pageNum=0&refId=fbtIdRd%2FZppUOGikEQ7Cag%3D%3D&trackingId=Klq5DgBE5qKC%2FCplzzoxwA%3D%3D",
+    "description": "LinkedIn Job: Senior Full Stack Engineer (.NET & Vue/React) - Fully Remote - CET Timezone at CoverGo | Insurtech",
+    "source": "linkedin.com"
+  },
+  {
+    "id": "li-1772471700966-15",
+    "title": "Senior Full Stack Engineer (.NET & Vue/React) - Fully Remote - CET Timezone",
+    "company": "CoverGo | Insurtech",
+    "location": "Kathmandu, Bāgmatī, Nepal",
+    "link": "https://np.linkedin.com/jobs/view/senior-full-stack-engineer-net-vue-react-fully-remote-cet-timezone-at-covergo-insurtech-4342276719?position=16&pageNum=0&refId=fbtIdRd%2FZppUOGikEQ7Cag%3D%3D&trackingId=LoLSiPcPjOUkgHq33AbRng%3D%3D",
+    "description": "LinkedIn Job: Senior Full Stack Engineer (.NET & Vue/React) - Fully Remote - CET Timezone at CoverGo | Insurtech",
+    "source": "linkedin.com"
+  },
+  {
+    "id": "li-1772471700966-16",
+    "title": "Senior Full Stack Engineer (.NET & Vue/React) - Fully Remote - CET Timezone",
+    "company": "CoverGo | Insurtech",
+    "location": "Lalitpur, Bāgmatī, Nepal",
+    "link": "https://np.linkedin.com/jobs/view/senior-full-stack-engineer-net-vue-react-fully-remote-cet-timezone-at-covergo-insurtech-4342276720?position=17&pageNum=0&refId=fbtIdRd%2FZppUOGikEQ7Cag%3D%3D&trackingId=dAAMpbQK4IuF3qDzEUSWBQ%3D%3D",
+    "description": "LinkedIn Job: Senior Full Stack Engineer (.NET & Vue/React) - Fully Remote - CET Timezone at CoverGo | Insurtech",
+    "source": "linkedin.com"
+  },
+  {
+    "id": "li-1772471700966-17",
+    "title": "Senior Full Stack Engineer",
+    "company": "reAlpha",
+    "location": "Kathmandu, Bāgmatī, Nepal",
+    "link": "https://np.linkedin.com/jobs/view/senior-full-stack-engineer-at-realpha-4368648800?position=18&pageNum=0&refId=fbtIdRd%2FZppUOGikEQ7Cag%3D%3D&trackingId=B2uFGyY6ta6HNyvKC3MHgQ%3D%3D",
+    "description": "LinkedIn Job: Senior Full Stack Engineer at reAlpha",
+    "source": "linkedin.com"
+  },
+  {
+    "id": "li-1772471700966-18",
+    "title": "Senior Full Stack Web Developer",
+    "company": "BlackBox Technologies",
+    "location": "Kathmandu, Bāgmatī, Nepal",
+    "link": "https://np.linkedin.com/jobs/view/senior-full-stack-web-developer-at-blackbox-technologies-4376480832?position=19&pageNum=0&refId=fbtIdRd%2FZppUOGikEQ7Cag%3D%3D&trackingId=FibrQvHrpDNPDAkGcEct4g%3D%3D",
+    "description": "LinkedIn Job: Senior Full Stack Web Developer at BlackBox Technologies",
+    "source": "linkedin.com"
+  },
+  {
+    "id": "li-1772471700966-19",
+    "title": "Senior PHP Full Stack Laravel Development Lead (Remote)",
+    "company": "Smile",
+    "location": "Nepal",
+    "link": "https://np.linkedin.com/jobs/view/senior-php-full-stack-laravel-development-lead-remote-at-smile-4358297176?position=20&pageNum=0&refId=fbtIdRd%2FZppUOGikEQ7Cag%3D%3D&trackingId=EGX2uWGOWII%2FCfNjkztI%2BA%3D%3D",
+    "description": "LinkedIn Job: Senior PHP Full Stack Laravel Development Lead (Remote) at Smile",
+    "source": "linkedin.com"
+  },
+  {
     "id": "li-1772437158556-0",
     "title": "Junior React.js Developer (Fresher)",
     "company": "Froglake Innovations And Technology Pvt. Ltd.",

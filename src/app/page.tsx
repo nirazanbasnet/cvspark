@@ -1,9 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { UploadCloud, Loader2, FileText, ArrowRight, Trash2, Database } from "lucide-react";
+import { UploadCloud, Loader2, Sparkles, ArrowRight, Database } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useCvContext } from "@/context/CvContext";
+import { motion } from "framer-motion";
+import Navbar from "@/components/Navbar";
 
 export default function Home() {
   const [file, setFile] = useState<File | null>(null);
@@ -80,105 +82,148 @@ export default function Home() {
     }
   };
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.15,
+        delayChildren: 0.2,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+        ease: [0.25, 0.46, 0.45, 0.94] as const,
+      },
+    },
+  };
+
   return (
-    <main className="min-h-screen bg-neutral-950 text-white selection:bg-rose-500/30 font-sans">
-      <div className="max-w-5xl mx-auto px-6 py-20 flex flex-col items-center relative">
-        <div className="absolute top-6 right-6 z-50">
-          <button onClick={() => router.push('/dashboard/scraper')} className="flex items-center gap-2 bg-white/5 border border-white/10 px-4 py-2 rounded-xl text-sm font-semibold hover:bg-white/10 hover:scale-105 transition-all outline-none">
-            <Database className="w-4 h-4 text-rose-500" />
-            Scraper Database
-          </button>
-        </div>
+    <main className="min-h-screen bg-white font-sans text-slate-900 selection:bg-blue-500/30 overflow-hidden relative">
+      <Navbar />
 
-        <div className="text-center mb-16 relative z-10 w-full max-w-3xl">
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[400px] h-[400px] bg-rose-500/10 rounded-full blur-3xl opacity-50 pointer-events-none"></div>
-          <h1 className="text-5xl md:text-7xl font-extrabold tracking-tighter mb-6 bg-gradient-to-br from-white to-white/40 bg-clip-text text-transparent">
-            CV Score Builder
-          </h1>
-          <p className="text-lg md:text-xl text-neutral-400 font-medium">
-            Upload your resume. Benchmark it against the industry standard.
-          </p>
-        </div>
+      {/* Background Gradient */}
+      <div className="absolute inset-0 bg-gradient-to-b from-sky-50 via-blue-50/50 to-white pointer-events-none" />
 
-        {/* Upload Zone */}
-        <div className="w-full max-w-2xl bg-white/5 backdrop-blur-xl border border-white/10 p-10 rounded-3xl shadow-2xl relative overflow-hidden group mb-16">
-          <div className="relative flex flex-col items-center justify-center border-2 border-dashed border-white/20 rounded-2xl p-12 transition-colors hover:border-rose-400/50 hover:bg-white/5">
-            <UploadCloud className="w-16 h-16 text-rose-400 mb-6 drop-shadow-lg" />
-            <input
-              type="file"
-              accept=".pdf"
-              className="hidden"
-              id="file-upload"
-              onChange={(e) => setFile(e.target.files?.[0] || null)}
-            />
-            <label
-              htmlFor="file-upload"
-              className="cursor-pointer bg-white text-black font-semibold px-6 py-3 rounded-full hover:bg-neutral-200 transition-all shadow-[0_0_20px_rgba(255,255,255,0.1)] mb-4 hover:scale-105"
-            >
-              {file ? file.name : "Select PDF Resume"}
-            </label>
-            <p className="text-sm text-neutral-500 font-medium">Only PDF files are supported</p>
-          </div>
-
-          {errorMsg && (
-            <div className="mt-4 p-4 bg-rose-500/20 border border-rose-500/30 rounded-xl text-rose-400 text-sm text-center font-medium">
-              {errorMsg}
-            </div>
-          )}
-
-          <button
-            onClick={handleUpload}
-            disabled={!file || loading}
-            className="mt-8 w-full bg-rose-500 hover:bg-rose-600 disabled:opacity-50 disabled:hover:scale-100 disabled:cursor-not-allowed text-white font-bold py-4 rounded-xl flex items-center justify-center gap-3 transition-all hover:scale-[1.02] shadow-[0_0_25px_rgba(244,63,94,0.3)]"
+      <div className="relative z-10 px-4 sm:px-6 lg:px-12 xl:px-20 pt-20 pb-16 min-h-screen flex flex-col justify-center items-center">
+        <motion.div
+          className="relative max-w-4xl mx-auto w-full text-center flex flex-col items-center"
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+        >
+          {/* Decorative curved line */}
+          <svg
+            className="absolute -top-10 left-1/2 -translate-x-1/2 w-full max-w-4xl h-32 opacity-30 pointer-events-none"
+            viewBox="0 0 800 120"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
           >
-            {loading ? (
-              <>
-                <Loader2 className="w-5 h-5 animate-spin" />
-                {loadingText}
-              </>
-            ) : (
-              "Benchmark My Resume"
-            )}
-          </button>
-        </div>
+            <path
+              d="M0 60 Q200 0 400 60 T800 60"
+              stroke="#3B82F6"
+              strokeWidth="1"
+              fill="none"
+              strokeLinecap="round"
+            />
+          </svg>
 
-        {/* Previous CVs List */}
-        {isLoaded && cvs.length > 0 && (
-          <div className="w-full max-w-3xl">
-            <h3 className="text-xl font-bold mb-6 text-white/90">Recent Documents</h3>
-            <div className="flex flex-col gap-4">
-              {cvs.map(cv => (
-                <div key={cv.id} className="bg-white/5 border border-white/10 p-4 rounded-2xl flex items-center justify-between hover:bg-white/10 transition-colors group">
-                  <div className="flex items-center gap-4 cursor-pointer flex-1" onClick={() => router.push(`/score/${cv.id}`)}>
-                    <div className="p-3 bg-white/10 rounded-xl">
-                      <FileText className="w-6 h-6 text-neutral-300" />
-                    </div>
-                    <div>
-                      <h4 className="font-semibold text-white group-hover:text-rose-400 transition-colors">{cv.fileName}</h4>
-                      <p className="text-sm text-neutral-400">
-                        {new Date(cv.uploadDate).toLocaleDateString()} • Score: {cv.analysisData?.score ?? "N/A"}/100 • {cv.analysisData?.roleCategory ?? "Unknown"}
-                      </p>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <button
-                      onClick={() => router.push(`/score/${cv.id}`)}
-                      className="p-3 text-white/50 hover:text-white transition-colors"
-                    >
-                      <ArrowRight className="w-5 h-5" />
-                    </button>
-                    <button
-                      onClick={(e) => { e.stopPropagation(); deleteCv(cv.id); }}
-                      className="p-3 text-white/30 hover:text-rose-500 transition-colors z-10"
-                    >
-                      <Trash2 className="w-5 h-5" />
-                    </button>
-                  </div>
-                </div>
-              ))}
+          {/* Sparkle Icon */}
+          <motion.div
+            variants={itemVariants}
+            className="flex justify-center mb-6"
+          >
+            <div className="w-10 h-10 bg-blue-500 rounded-lg flex items-center justify-center shadow-lg shadow-blue-200">
+              <Sparkles className="w-5 h-5 text-white" />
             </div>
-          </div>
-        )}
+          </motion.div>
+
+          {/* Main Heading */}
+          <motion.h1
+            variants={itemVariants}
+            className="font-serif text-4xl sm:text-5xl lg:text-7xl text-slate-900 leading-[1.1] mb-6 font-bold tracking-tight"
+          >
+            Benchmark Your CV
+            <br />
+            <span className="text-blue-600">Against The Industry</span>
+          </motion.h1>
+
+          {/* Subtext */}
+          <motion.p
+            variants={itemVariants}
+            className="text-slate-600 text-base sm:text-lg lg:text-xl max-w-2xl mx-auto mb-10 font-medium"
+          >
+            Upload your resume, analyze your readiness score, and match with the best jobs in seconds.
+          </motion.p>
+
+          {/* Upload & Actions */}
+          <motion.div
+            variants={itemVariants}
+            className="w-full max-w-lg mx-auto flex flex-col items-center gap-4"
+          >
+            {/* The Upload Area matching Light Theme */}
+            <div className={`w-full bg-white border-2 border-dashed rounded-2xl p-8 transition-colors ${file ? 'border-blue-300 bg-blue-50/50' : 'border-slate-200 hover:border-blue-400 hover:bg-slate-50'}`}>
+              <div className="flex flex-col items-center justify-center">
+                <UploadCloud className="w-12 h-12 text-blue-500 mb-4" />
+                <input
+                  type="file"
+                  accept=".pdf"
+                  className="hidden"
+                  id="file-upload"
+                  onChange={(e) => setFile(e.target.files?.[0] || null)}
+                />
+
+                <label
+                  htmlFor="file-upload"
+                  className="cursor-pointer bg-slate-900 text-white font-semibold px-6 py-2.5 rounded-full hover:bg-slate-800 transition-all shadow-md mb-3"
+                >
+                  {file ? 'Change PDF File' : 'Select Resume (PDF)'}
+                </label>
+
+                {file && (
+                  <p className="text-sm font-bold text-slate-800 break-all px-4">{file.name}</p>
+                )}
+                {!file && (
+                  <p className="text-xs text-slate-500 font-medium mt-1">Accepts standard PDF formats</p>
+                )}
+              </div>
+            </div>
+
+            {errorMsg && (
+              <div className="w-full p-4 bg-red-50 border border-red-200 rounded-xl text-red-600 text-sm text-center font-medium">
+                {errorMsg}
+              </div>
+            )}
+
+            {/* Primary Submit Button */}
+            <motion.button
+              onClick={handleUpload}
+              disabled={!file || loading}
+              className="w-full mt-2 px-8 py-4 text-base font-bold text-white bg-blue-600 rounded-full hover:bg-blue-700 transition-colors shadow-lg shadow-blue-200 disabled:opacity-50 disabled:hover:scale-100 disabled:cursor-not-allowed flex items-center justify-center gap-3"
+              whileHover={!file || loading ? {} : { scale: 1.02, boxShadow: '0 10px 30px rgba(37, 99, 235, 0.3)' }}
+              whileTap={!file || loading ? {} : { scale: 0.98 }}
+            >
+              {loading ? (
+                <>
+                  <Loader2 className="w-5 h-5 animate-spin" />
+                  {loadingText}
+                </>
+              ) : (
+                <>
+                  Analyze Resume Now <ArrowRight className="w-5 h-5" />
+                </>
+              )}
+            </motion.button>
+
+          </motion.div>
+        </motion.div>
       </div>
     </main>
   );
