@@ -3,6 +3,9 @@ import { NextResponse } from "next/server";
 import pdfParse from "pdf-parse";
 import { groq, ANALYSIS_PROMPT } from "@/lib/groq";
 
+// Increase max duration for long multi-page CV processing
+export const maxDuration = 60;
+
 // Polyfill for pdf-parse "DOMMatrix is not defined" error in Next.js Node environment
 if (typeof global !== "undefined" && !global.DOMMatrix) {
     (global as any).DOMMatrix = class DOMMatrix {
@@ -46,6 +49,7 @@ export async function POST(req: Request) {
             ],
             model: "llama-3.3-70b-versatile",
             temperature: 0.1,
+            max_tokens: 8000,
             response_format: { type: "json_object" }
         });
 

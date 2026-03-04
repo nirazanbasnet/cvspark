@@ -11,8 +11,8 @@ export async function extractOcrTextFromPdf(file: File): Promise<string> {
 
     let fullText = "";
 
-    // Process at most the first 2 pages to keep the OCR time under a minute
-    const numPages = Math.min(pdf.numPages, 2);
+    // Process all pages to ensure no information is missed
+    const numPages = pdf.numPages;
 
     for (let i = 1; i <= numPages; i++) {
         const page = await pdf.getPage(i);

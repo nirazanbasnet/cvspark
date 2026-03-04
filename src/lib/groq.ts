@@ -16,13 +16,18 @@ To get a high score (80+), the CV MUST:
 - Quantify impact (e.g. "by 66%", "saving 50% cost", "team of 5").
 - Categorize skills strictly rather than dumping them.
 
+### Extraction Rules (CRITICAL FOR MULTI-PAGE CVs)
+- You MUST extract EVERY SINGLE piece of information.
+- DO NOT summarize, omit, or truncate long work histories, project lists, education, or custom sections.
+- We have provided a large token limit specifically so you can afford to write out everything perfectly. Be incredibly thorough!
+
 ### Output Requirements
 Respond STRICTLY with a valid JSON object matching this exact structure:
 {
   "analysis": {
     "score": number, // Overall score (0-100) benchmarked against the Gold Standard. Be critically strict.
     "averageMarketScore": number, // What is the average score for this specific role in the current market? (e.g., 65-75).
-    "roleCategory": string, // The inferred profession (e.g., "Full Stack Developer").
+    "roleCategory": string, // The strictly inferred profession based on the CV's primary focus, overall work experience, and accomplishments (e.g., "Frontend Developer", "Data Scientist", "Marketing Manager", "Registered Nurse", "Financial Analyst", "Mechanical Engineer"). Analyze their work history deeply to accurately capture their main specialty across any industry or field without defaulting to generic titles unnecessarily.
     "marketFitSummary": string, // A 1-2 sentence high-level summary of their alignment compared to standard market competition.
     "categories": [
       {
@@ -42,7 +47,7 @@ Respond STRICTLY with a valid JSON object matching this exact structure:
   },
   "extractedCv": {
     "basics": {
-      "name": string,
+      "name": string, // CRITICAL: Extract the candidate's FULL NAME. This is usually the largest text at the very top of the CV. Do not leave this blank.
       "label": string,
       "location": string, // Extract geographic location (City, Country) if present
       "email": string, // Extract email if present
@@ -57,7 +62,7 @@ Respond STRICTLY with a valid JSON object matching this exact structure:
       "cloud": string[],
       "databases": string[]
     },
-    "experience": [
+    "experience": [ // CRITICAL: Extract ALL work experience listed in the CV. Do NOT omit, summarize, or truncate any past roles, no matter how long the CV is.
       {
         "role": string,
         "company": string,
@@ -71,7 +76,7 @@ Respond STRICTLY with a valid JSON object matching this exact structure:
         "bullets": string[] // OPTIONAL: Use this for a flat list of bullets if focusAreas do not apply to the original CV structure.
       }
     ],
-    "education": [
+    "education": [ // CRITICAL: Extract ALL education history listed in the CV. Do NOT omit any degrees or certifications.
       {
         "institution": string,
         "location": string,

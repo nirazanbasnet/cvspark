@@ -51,7 +51,7 @@ export function ResumeViewer({ cvData }: { cvData: GoldStandardResume }) {
     const highlights = [...allSkills, ...commonActionVerbs];
 
     return (
-        <div className="bg-white rounded-xl shadow-sm p-8 text-slate-900 font-sans h-full">
+        <div className="p-8 text-slate-900 font-sans h-full">
             {/* Header / Personal Info */}
             <div className="text-center border-b border-slate-200 pb-6 mb-6">
                 <h1 className="text-3xl font-bold text-slate-900 mb-1">{cvData.basics.name}</h1>

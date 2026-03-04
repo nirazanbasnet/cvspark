@@ -4,6 +4,17 @@ import { useCvContext } from "@/context/CvContext";
 import { useRouter } from "next/navigation";
 import { Database, FileText, Trash2, ArrowLeft } from "lucide-react";
 import Navbar from "@/components/Navbar";
+import {
+    AlertDialog,
+    AlertDialogAction,
+    AlertDialogCancel,
+    AlertDialogContent,
+    AlertDialogDescription,
+    AlertDialogFooter,
+    AlertDialogHeader,
+    AlertDialogTitle,
+    AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 
 export default function DashboardPage() {
     const { cvs, deleteCv, isLoaded } = useCvContext();
@@ -79,18 +90,39 @@ export default function DashboardPage() {
                                 </div>
 
                                 {/* Delete Button */}
-                                <button
-                                    onClick={(e) => {
-                                        e.stopPropagation();
-                                        if (confirm('Are you sure you want to permanently delete this document and its associated analysis?')) {
-                                            deleteCv(cv.id);
-                                        }
-                                    }}
-                                    className="absolute top-4 right-4 p-2 text-slate-300 hover:text-red-500 hover:bg-red-50 rounded-xl opacity-0 group-hover:opacity-100 transition-all z-20"
-                                    title="Delete Report"
-                                >
-                                    <Trash2 className="w-4 h-4" />
-                                </button>
+                                <AlertDialog>
+                                    <AlertDialogTrigger asChild>
+                                        <button
+                                            onClick={(e) => {
+                                                e.stopPropagation();
+                                            }}
+                                            className="absolute top-4 right-4 p-2 text-slate-300 hover:text-red-500 hover:bg-red-50 rounded-xl opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-all z-20"
+                                            title="Delete Report"
+                                        >
+                                            <Trash2 className="w-4 h-4 md:w-5 md:h-5" />
+                                        </button>
+                                    </AlertDialogTrigger>
+                                    <AlertDialogContent onClick={(e) => e.stopPropagation()}>
+                                        <AlertDialogHeader>
+                                            <AlertDialogTitle className="text-black">Are you absolutely sure?</AlertDialogTitle>
+                                            <AlertDialogDescription>
+                                                This action cannot be undone. This will permanently delete this document and its associated analysis.
+                                            </AlertDialogDescription>
+                                        </AlertDialogHeader>
+                                        <AlertDialogFooter>
+                                            <AlertDialogCancel className="text-black" onClick={(e) => e.stopPropagation()}>Cancel</AlertDialogCancel>
+                                            <AlertDialogAction
+                                                onClick={(e) => {
+                                                    e.stopPropagation();
+                                                    deleteCv(cv.id);
+                                                }}
+                                                className="bg-red-600 text-white hover:bg-red-700 focus:ring-red-600"
+                                            >
+                                                Delete
+                                            </AlertDialogAction>
+                                        </AlertDialogFooter>
+                                    </AlertDialogContent>
+                                </AlertDialog>
                             </div>
                         ))}
                     </div>

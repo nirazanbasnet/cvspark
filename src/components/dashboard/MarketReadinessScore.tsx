@@ -123,7 +123,7 @@ export function MarketReadinessScore({ analysisData }: { analysisData: AnalysisD
                                             <AlertCircle className="w-4 h-4" /> Actionable Fixes (Do&apos;s &amp; Don&apos;ts)
                                         </div>
 
-                                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 gap-4">
+                                        <div className="grid grid-cols-1 gap-4">
                                             {category.improvements.map((item, iIdx) => (
                                                 <div key={iIdx} className="bg-white border border-slate-200 shadow-sm rounded-xl overflow-hidden flex flex-col relative group">
                                                     {/* Original (Don't) */}
