@@ -23,7 +23,6 @@ import { useCvContext } from "@/context/CvContext";
 import { useSearchParams } from "next/navigation";
 import { GoldStandardResume } from "@/types/resume";
 
-// We will import these once they are created, stubbing them out for now to ensure compilation.
 import { BasicsEditor } from "@/components/builder/BasicsEditor";
 import { ExperienceEditor } from "@/components/builder/ExperienceEditor";
 import { EducationEditor } from "@/components/builder/EducationEditor";
@@ -37,23 +36,18 @@ function BuilderContent() {
     const { cvs, updateCvData, getPdfBlob } = useCvContext();
     const cv = cvs.find(c => c.id === id);
 
-    // Core Live State Object
     const [liveCvData, setLiveCvData] = useState<GoldStandardResume | null>(null);
-
     const [activeTab, setActiveTab] = useState("basics");
     const [isSaving, setIsSaving] = useState(false);
     const [originalPdfUrl, setOriginalPdfUrl] = useState<string | null>(null);
     const [showOriginal, setShowOriginal] = useState(false);
 
-    // Hydrate the live editor state from the DB when the component mounts
     useEffect(() => {
         if (cv?.cvData && !liveCvData) {
-            // Deep copy to break reference links and ensure React detects state mutations properly
             setLiveCvData(JSON.parse(JSON.stringify(cv.cvData)));
         }
     }, [cv, liveCvData]);
 
-    // Load the massive Original PDF from IndexedDB seamlessly
     useEffect(() => {
         async function fetchPdf() {
             if (!cv || originalPdfUrl) return;
@@ -70,22 +64,21 @@ function BuilderContent() {
         try {
             setIsSaving(true);
             await updateCvData(cv.id, liveCvData);
-            // Optionally could pop a success toast here
         } catch (err) {
             console.error("Failed to save CV:", err);
             alert("Failed to save changes.");
         } finally {
-            setTimeout(() => setIsSaving(false), 500); // UI visual delay
+            setTimeout(() => setIsSaving(false), 500);
         }
     };
 
     if (!cv || !liveCvData) {
         return (
-            <div className="min-h-screen bg-neutral-950 flex flex-col items-center justify-center text-white">
-                <Compass className="w-12 h-12 text-rose-500 mb-4 animate-pulse" />
+            <div className="min-h-screen bg-slate-50 flex flex-col items-center justify-center text-slate-900">
+                <Compass className="w-12 h-12 text-blue-600 mb-4 animate-pulse" />
                 <h1 className="text-2xl font-bold mb-2">No CV Data Found</h1>
-                <p className="text-neutral-400 mb-6">Please analyze a resume on the dashboard first.</p>
-                <Link href="/" className="px-6 py-3 bg-white text-black font-bold rounded-full hover:scale-105 transition-transform">
+                <p className="text-slate-500 mb-6">Please analyze a resume on the dashboard first.</p>
+                <Link href="/" className="px-6 py-3 bg-blue-600 text-white font-bold rounded-full hover:scale-105 transition-transform shadow-md">
                     Go to Dashboard
                 </Link>
             </div>
@@ -102,14 +95,14 @@ function BuilderContent() {
     ];
 
     return (
-        <div className="min-h-screen bg-neutral-950 text-white font-sans flex flex-col md:flex-row overflow-hidden">
+        <div className="min-h-screen bg-zinc-50 text-slate-900 font-sans flex flex-col md:flex-row overflow-hidden">
             {/* Sidebar Navigation */}
-            <aside className="w-full md:w-64 bg-black/60 border-r border-white/5 p-6 flex flex-col shrink-0 relative z-20">
-                <Link href={`/score/${cv.id}`} className="flex items-center gap-2 text-rose-400 font-bold mb-10 hover:text-white transition-colors cursor-pointer">
-                    <ArrowLeft className="w-4 h-4" /> Back to Dashboard
+            <aside className="w-full md:w-64 bg-white border-r border-slate-200 p-6 flex flex-col shrink-0 relative z-20">
+                <Link href={`/score/${cv.id}`} className="flex items-center gap-2 text-blue-600 font-bold mb-10 hover:text-blue-700 transition-colors cursor-pointer">
+                    <ArrowLeft className="w-4 h-4" /> Back to Score
                 </Link>
 
-                <h3 className="text-[11px] font-bold text-neutral-500 uppercase tracking-widest mb-4">Document Sections</h3>
+                <h3 className="text-[11px] font-bold text-slate-400 uppercase tracking-widest mb-4">Document Sections</h3>
                 <nav className="space-y-1.5 flex-1">
                     {TABS.map((item) => (
                         <button
@@ -118,21 +111,21 @@ function BuilderContent() {
                             className={cn(
                                 "w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all group",
                                 activeTab === item.id
-                                    ? "bg-rose-500/10 text-rose-400 shadow-[inset_2px_0_0_0_#fb7185] border border-rose-500/20"
-                                    : "text-neutral-400 hover:bg-white/5 hover:text-white border border-transparent"
+                                    ? "bg-blue-600 text-white shadow-md shadow-blue-500/20"
+                                    : "text-slate-500 hover:bg-slate-100/50 hover:text-slate-900 border border-transparent"
                             )}
                         >
-                            <item.icon className={cn("w-4 h-4 transition-colors", activeTab === item.id ? "text-rose-400" : "text-neutral-500 group-hover:text-neutral-300")} />
+                            <item.icon className={cn("w-4 h-4 transition-colors", activeTab === item.id ? "text-white" : "text-slate-400 group-hover:text-slate-600")} />
                             {item.label}
                         </button>
                     ))}
                 </nav>
 
-                <div className="mt-auto pt-6 border-t border-white/10 space-y-3">
+                <div className="mt-auto pt-6 border-t border-slate-200 space-y-3">
                     <button
                         onClick={handleSave}
                         disabled={isSaving}
-                        className="w-full h-11 bg-rose-500 hover:bg-rose-600 disabled:bg-rose-500/50 disabled:cursor-not-allowed text-white text-sm font-bold flex items-center justify-center gap-2 rounded-xl transition-all hover:scale-[1.02] shadow-[0_0_20px_rgba(244,63,94,0.3)]"
+                        className="w-full h-11 bg-slate-900 hover:bg-slate-800 disabled:bg-slate-400 disabled:cursor-not-allowed text-white text-sm font-medium flex items-center justify-center gap-2 rounded-xl transition-all shadow-sm"
                     >
                         {isSaving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
                         {isSaving ? "Saving..." : "Save Changes"}
@@ -144,10 +137,8 @@ function BuilderContent() {
             <main className="flex-1 flex flex-col xl:flex-row h-screen overflow-hidden">
 
                 {/* Left Pane: Specialized Section Editor */}
-                <div className="w-full xl:w-1/2 p-6 md:p-8 xl:p-10 overflow-y-auto custom-scrollbar bg-gradient-to-br from-neutral-900 to-black relative">
-                    <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-rose-500/5 rounded-full blur-[100px] pointer-events-none"></div>
-
-                    <div className="max-w-2xl mx-auto relative z-10 pb-32">
+                <div className="w-full xl:w-1/2 p-6 md:p-8 xl:p-10 overflow-y-auto custom-scrollbar bg-white relative">
+                    <div className="relative z-10 pb-32">
                         {activeTab === "basics" && <BasicsEditor liveCvData={liveCvData} setLiveCvData={setLiveCvData} />}
                         {activeTab === "experience" && <ExperienceEditor liveCvData={liveCvData} setLiveCvData={setLiveCvData} />}
                         {activeTab === "education" && <EducationEditor liveCvData={liveCvData} setLiveCvData={setLiveCvData} />}
@@ -158,10 +149,10 @@ function BuilderContent() {
                 </div>
 
                 {/* Right Pane: Live ATS PDF Preview AND Original Split Viewer */}
-                <div className="w-full xl:w-1/2 bg-neutral-200 overflow-hidden flex flex-col relative border-l border-neutral-800/10">
+                <div className="w-full xl:w-1/2 bg-zinc-50 overflow-hidden flex flex-col relative border-l border-slate-200 shadow-inner">
 
                     {/* Preview Context Bar */}
-                    <div className="h-14 bg-white border-b border-neutral-300 flex items-center justify-between px-4 pr-14 z-10 shadow-sm shrink-0">
+                    <div className="h-14 bg-white/80 backdrop-blur-md border-b border-slate-200 flex items-center justify-between px-4 pr-14 z-10 shrink-0">
                         <div className="flex items-center gap-2">
                             {originalPdfUrl && (
                                 <button
@@ -169,8 +160,8 @@ function BuilderContent() {
                                     className={cn(
                                         "flex items-center gap-2 px-3 py-1.5 text-xs font-bold rounded-md transition-colors",
                                         showOriginal
-                                            ? "bg-amber-100 text-amber-700 border border-amber-300 hover:bg-amber-200"
-                                            : "bg-white text-neutral-600 border border-neutral-300 hover:bg-neutral-100"
+                                            ? "bg-amber-100 text-amber-800 border border-amber-300 hover:bg-amber-200"
+                                            : "bg-white text-slate-700 border border-slate-300 hover:bg-slate-50"
                                     )}
                                 >
                                     {showOriginal ? <EyeOff className="w-3.5 h-3.5" /> : <Eye className="w-3.5 h-3.5" />}
@@ -192,11 +183,10 @@ function BuilderContent() {
                                     jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
                                 };
 
-                                // Use dynamic import for html2pdf to prevent SSR window issues
                                 const html2pdf = (await import('html2pdf.js')).default as any;
                                 html2pdf().set(opt).from(element).save();
                             }}
-                            className="px-4 py-1.5 bg-black text-white rounded-md text-xs font-bold flex items-center gap-2 hover:bg-neutral-800 transition-colors shadow-sm"
+                            className="px-4 py-1.5 bg-blue-600 text-white rounded-lg text-xs font-semibold flex items-center gap-2 hover:bg-blue-700 transition-colors shadow-sm"
                         >
                             <Download className="w-3.5 h-3.5" /> Download ATS PDF
                         </button>
@@ -206,8 +196,8 @@ function BuilderContent() {
                     <div className="flex-1 overflow-y-auto custom-scrollbar relative p-8">
                         {showOriginal && originalPdfUrl ? (
                             <iframe
-                                src={originalPdfUrl}
-                                className="w-full h-[1200px] border border-neutral-300 rounded-sm shadow-xl bg-white"
+                                src={`${originalPdfUrl}#view=FitH`}
+                                className="w-full h-[1200px] border border-slate-300 rounded-sm shadow-xl bg-white"
                                 title="Original Uploaded CV"
                             />
                         ) : (
@@ -228,8 +218,8 @@ function BuilderContent() {
 export default function BuilderPage() {
     return (
         <Suspense fallback={
-            <div className="min-h-screen bg-neutral-950 flex flex-col items-center justify-center text-white">
-                <Loader2 className="w-12 h-12 text-rose-500 mb-4 animate-spin" />
+            <div className="min-h-screen bg-slate-50 flex flex-col items-center justify-center text-slate-900">
+                <Loader2 className="w-12 h-12 text-blue-600 mb-4 animate-spin" />
                 <h1 className="text-2xl font-bold mb-2">Loading ATS Interface...</h1>
             </div>
         }>

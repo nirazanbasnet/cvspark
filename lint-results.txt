@@ -1,0 +1,141 @@
+
+/Users/nirajanbasnet/Documents/personal-projects/cvspark/extract_pdf.js
+  1:12  error  A `require()` style import is forbidden  @typescript-eslint/no-require-imports
+  2:13  error  A `require()` style import is forbidden  @typescript-eslint/no-require-imports
+
+/Users/nirajanbasnet/Documents/personal-projects/cvspark/scripts/scrape_jobs.mjs
+  14:7  warning  'fallbackJobs' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+/Users/nirajanbasnet/Documents/personal-projects/cvspark/scripts/scrape_real_jobs.mjs
+  189:17  warning  'e' is defined but never used  @typescript-eslint/no-unused-vars
+
+/Users/nirajanbasnet/Documents/personal-projects/cvspark/src/app/api/analyze/route.ts
+    8:16  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   72:43  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  100:21  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Users/nirajanbasnet/Documents/personal-projects/cvspark/src/app/api/generate-summary/route.ts
+  44:21  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Users/nirajanbasnet/Documents/personal-projects/cvspark/src/app/api/jobs-stats/route.ts
+  11:39  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  13:26  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  22:17  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Users/nirajanbasnet/Documents/personal-projects/cvspark/src/app/api/match-jobs/route.ts
+   12:29  warning  'primaryRole' is assigned a value but never used  @typescript-eslint/no-unused-vars
+   39:46  error    Unexpected any. Specify a different type          @typescript-eslint/no-explicit-any
+   91:18  warning  'e' is defined but never used                     @typescript-eslint/no-unused-vars
+   97:53  error    Unexpected any. Specify a different type          @typescript-eslint/no-explicit-any
+   98:50  error    Unexpected any. Specify a different type          @typescript-eslint/no-explicit-any
+  103:23  error    Unexpected any. Specify a different type          @typescript-eslint/no-explicit-any
+  107:21  error    Unexpected any. Specify a different type          @typescript-eslint/no-explicit-any
+
+/Users/nirajanbasnet/Documents/personal-projects/cvspark/src/app/api/scrape-custom/route.ts
+   34:32  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  104:50  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  104:88  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  122:21  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Users/nirajanbasnet/Documents/personal-projects/cvspark/src/app/builder/page.tsx
+  186:91  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Users/nirajanbasnet/Documents/personal-projects/cvspark/src/app/dashboard/page.tsx
+  35:81  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+
+/Users/nirajanbasnet/Documents/personal-projects/cvspark/src/app/dashboard/scraper/page.tsx
+    9:81  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   57:23  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  126:78  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Users/nirajanbasnet/Documents/personal-projects/cvspark/src/app/page.tsx
+   4:54  warning  'Database' is defined but never used           @typescript-eslint/no-unused-vars
+  14:11  warning  'cvs' is assigned a value but never used       @typescript-eslint/no-unused-vars
+  14:23  warning  'deleteCv' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  14:33  warning  'isLoaded' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  78:19  error    Unexpected any. Specify a different type       @typescript-eslint/no-explicit-any
+
+/Users/nirajanbasnet/Documents/personal-projects/cvspark/src/app/score/[id]/page.tsx
+  96:23  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Users/nirajanbasnet/Documents/personal-projects/cvspark/src/components/builder/ResumeEditor.tsx
+  51:94   error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+  51:121  error  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+  51:136  error  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+
+/Users/nirajanbasnet/Documents/personal-projects/cvspark/src/components/dashboard/ActionableAdvice.tsx
+  20:29  error  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+  20:35  error  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+
+/Users/nirajanbasnet/Documents/personal-projects/cvspark/src/components/dashboard/JobMatches.tsx
+   37:8    warning  React Hook React.useEffect has missing dependencies: 'fetchMatches' and 'loading'. Either include them or remove the dependency array  react-hooks/exhaustive-deps
+   59:23   error    Unexpected any. Specify a different type                                                                                               @typescript-eslint/no-explicit-any
+  122:46   error    `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`                                                                        react/no-unescaped-entities
+  154:135  error    `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`                                                                        react/no-unescaped-entities
+
+/Users/nirajanbasnet/Documents/personal-projects/cvspark/src/components/dashboard/KeywordHeatmap.tsx
+  17:82  error  Error: Cannot call impure function during render
+
+`Math.random` is an impure function. Calling an impure function can produce unstable results that update unpredictably when the component happens to re-render. (https://react.dev/reference/rules/components-and-hooks-must-be-pure#components-and-hooks-must-be-idempotent).
+
+/Users/nirajanbasnet/Documents/personal-projects/cvspark/src/components/dashboard/KeywordHeatmap.tsx:17:82
+  15 |                     // Mocking target values slightly above current for visual effect 
+  16 |                     // (in a real app this would come from the API/Gold Standard)
+> 17 |                     const targetScore = Math.min(10, category.score + Math.floor(Math.random() * 3) + 1);
+     |                                                                                  ^^^^^^^^^^^^^ Cannot call impure function
+  18 |                     const diff = targetScore - category.score;
+  19 |
+  20 |                     return (  react-hooks/purity
+
+/Users/nirajanbasnet/Documents/personal-projects/cvspark/src/components/dashboard/MarketReadinessScore.tsx
+    1:10   warning  'cn' is defined but never used                                   @typescript-eslint/no-unused-vars
+    3:47   warning  'ArrowRight' is defined but never used                           @typescript-eslint/no-unused-vars
+   99:81   error    `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+   99:104  error    `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+  124:101  error    `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+  124:109  error    `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+  134:114  error    `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+  134:157  error    `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+  143:110  error    `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+  143:160  error    `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+
+/Users/nirajanbasnet/Documents/personal-projects/cvspark/src/context/CvContext.tsx
+  61:57  warning  'key' is defined but never used  @typescript-eslint/no-unused-vars
+
+/Users/nirajanbasnet/Documents/personal-projects/cvspark/src/lib/linkedinScraper.ts
+  31:28  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  57:21  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Users/nirajanbasnet/Documents/personal-projects/cvspark/src/lib/ocr.ts
+  29:30  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Users/nirajanbasnet/Documents/personal-projects/cvspark/test.page.tsx
+   6:80  warning  'ChevronRight' is defined but never used                                                                                  @typescript-eslint/no-unused-vars
+   7:20  warning  'SignedOut' is defined but never used                                                                                     @typescript-eslint/no-unused-vars
+   7:31  warning  'SignInButton' is defined but never used                                                                                  @typescript-eslint/no-unused-vars
+  15:40  warning  'updateFullCv' is assigned a value but never used                                                                         @typescript-eslint/no-unused-vars
+  16:27  warning  'setIsReanalyzing' is assigned a value but never used                                                                     @typescript-eslint/no-unused-vars
+  38:8   warning  React Hook useEffect has missing dependencies: 'cv' and 'getPdfBlob'. Either include them or remove the dependency array  react-hooks/exhaustive-deps
+
+/Users/nirajanbasnet/Documents/personal-projects/cvspark/tests/test_api.js
+  1:7  warning  'req' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+/Users/nirajanbasnet/Documents/personal-projects/cvspark/tests/test_api.ts
+  15:31  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Users/nirajanbasnet/Documents/personal-projects/cvspark/tests/test_linkedin.js
+  17:75  warning  'i' is defined but never used  @typescript-eslint/no-unused-vars
+
+/Users/nirajanbasnet/Documents/personal-projects/cvspark/tests/test_ocr.ts
+  2:23  error  A `require()` style import is forbidden  @typescript-eslint/no-require-imports
+
+/Users/nirajanbasnet/Documents/personal-projects/cvspark/tests/test_parse_pdf.js
+  1:12  error  A `require()` style import is forbidden  @typescript-eslint/no-require-imports
+  2:18  error  A `require()` style import is forbidden  @typescript-eslint/no-require-imports
+
+/Users/nirajanbasnet/Documents/personal-projects/cvspark/tests/test_scrape.js
+  1:15  error  A `require()` style import is forbidden  @typescript-eslint/no-require-imports
+  2:17  error  A `require()` style import is forbidden  @typescript-eslint/no-require-imports
+
+✖ 71 problems (51 errors, 20 warnings)
+

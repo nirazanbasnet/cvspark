@@ -53,11 +53,11 @@ export function ProjectsEditor({
                         <FileCode2 className="w-6 h-6 text-rose-400" />
                         Open Source Projects
                     </h2>
-                    <p className="text-neutral-400 text-sm">Highlight your personal projects and contributions.</p>
+                    <p className="text-slate-500 text-sm">Highlight your personal projects and contributions.</p>
                 </div>
                 <button
                     onClick={addProject}
-                    className="text-xs font-bold bg-white text-black px-4 py-2 rounded-lg flex items-center gap-2 hover:bg-neutral-200 transition-colors shadow-sm"
+                    className="text-xs font-bold bg-slate-900 text-white px-4 py-2 rounded-lg flex items-center gap-2 hover:bg-slate-800 transition-colors shadow-sm"
                 >
                     <Plus className="w-4 h-4" /> Add Project
                 </button>
@@ -68,28 +68,28 @@ export function ProjectsEditor({
                     const isExpanded = expandedBlocks.includes(idx);
 
                     return (
-                        <div key={idx} className="bg-white/5 border border-white/10 rounded-2xl overflow-hidden transition-all duration-300">
+                        <div key={idx} className="bg-white shadow-sm border border-slate-200 rounded-2xl overflow-hidden transition-all duration-300">
                             <div
                                 className={cn(
-                                    "p-5 flex items-center justify-between cursor-pointer transition-colors hover:bg-white/5",
-                                    isExpanded ? "bg-white/5 border-b border-white/5" : ""
+                                    "p-5 flex items-center justify-between cursor-pointer transition-colors hover:bg-slate-50",
+                                    isExpanded ? "bg-white shadow-sm border-b border-slate-200" : ""
                                 )}
                                 onClick={() => toggleBlock(idx)}
                             >
                                 <div className="flex-1">
-                                    <h3 className="text-lg font-bold text-white flex items-center gap-2">
+                                    <h3 className="text-lg font-bold text-slate-900 flex items-center gap-2">
                                         {project.title || "Untitled Project"}
                                     </h3>
                                 </div>
                                 <div className="flex items-center gap-3">
                                     <button
                                         onClick={(e) => { e.stopPropagation(); removeProject(idx); }}
-                                        className="p-2 text-neutral-500 hover:text-rose-400 hover:bg-rose-500/10 rounded-lg transition-colors"
+                                        className="p-2 text-slate-500 hover:text-slate-700 hover:text-rose-400 hover:bg-rose-100 rounded-lg transition-colors"
                                     >
                                         <Trash2 className="w-4 h-4" />
                                     </button>
-                                    <div className="p-1 rounded-full bg-white/10">
-                                        {isExpanded ? <ChevronUp className="w-5 h-5 text-white" /> : <ChevronDown className="w-5 h-5 text-white" />}
+                                    <div className="p-1 rounded-full bg-slate-100">
+                                        {isExpanded ? <ChevronUp className="w-5 h-5 text-slate-900" /> : <ChevronDown className="w-5 h-5 text-slate-900" />}
                                     </div>
                                 </div>
                             </div>
@@ -99,30 +99,30 @@ export function ProjectsEditor({
                                     <div className="space-y-4">
                                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                             <div className="space-y-1.5 md:col-span-2">
-                                                <label className="text-[11px] font-bold text-neutral-400 uppercase tracking-widest pl-1">Project Title</label>
+                                                <label className="text-[11px] font-bold text-slate-500 uppercase tracking-widest pl-1">Project Title</label>
                                                 <input
                                                     type="text"
                                                     value={project.title || ""}
                                                     onChange={(e) => handleChange(idx, "title", e.target.value)}
-                                                    className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-rose-400 focus:ring-1 focus:ring-rose-400"
+                                                    className="w-full bg-white shadow-sm border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none "
                                                 />
                                             </div>
                                             <div className="space-y-1.5 md:col-span-2">
-                                                <label className="text-[11px] font-bold text-neutral-400 uppercase tracking-widest pl-1">Project Link (URL)</label>
+                                                <label className="text-[11px] font-bold text-slate-500 uppercase tracking-widest pl-1">Project Link (URL)</label>
                                                 <input
                                                     type="text"
                                                     value={project.link || ""}
                                                     onChange={(e) => handleChange(idx, "link", e.target.value)}
-                                                    className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-rose-400 focus:ring-1 focus:ring-rose-400"
+                                                    className="w-full bg-white shadow-sm border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none "
                                                 />
                                             </div>
                                         </div>
                                         <div className="space-y-1.5">
-                                            <label className="text-[11px] font-bold text-neutral-400 uppercase tracking-widest pl-1">Description</label>
+                                            <label className="text-[11px] font-bold text-slate-500 uppercase tracking-widest pl-1">Description</label>
                                             <textarea
                                                 value={project.description || ""}
                                                 onChange={(e) => handleChange(idx, "description", e.target.value)}
-                                                className="w-full min-h-[100px] bg-black/40 border border-white/10 rounded-xl p-4 text-sm text-white focus:outline-none focus:border-rose-400 focus:ring-1 focus:ring-rose-400 resize-y"
+                                                className="w-full min-h-[100px] bg-white shadow-sm border border-slate-200 rounded-xl p-4 text-sm text-slate-900 focus:outline-none  resize-y"
                                             />
                                         </div>
                                     </div>

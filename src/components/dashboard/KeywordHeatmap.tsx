@@ -14,7 +14,8 @@ export function KeywordHeatmap({ categories }: { categories: AnalysisData["categ
                 {categories.slice(0, 5).map((category, idx) => {
                     // Mocking target values slightly above current for visual effect 
                     // (in a real app this would come from the API/Gold Standard)
-                    const targetScore = Math.min(10, category.score + Math.floor(Math.random() * 3) + 1);
+                    const randomAdd = (category.name.charCodeAt(0) % 3) + 1;
+                    const targetScore = Math.min(10, category.score + randomAdd);
                     const diff = targetScore - category.score;
 
                     return (

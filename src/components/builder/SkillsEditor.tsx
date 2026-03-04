@@ -40,18 +40,18 @@ export function SkillsEditor({
                     <Wrench className="w-6 h-6 text-rose-400" />
                     Technical Skills
                 </h2>
-                <p className="text-neutral-400 text-sm">Categorize your technical proficiencies (comma separated).</p>
+                <p className="text-slate-500 text-sm">Categorize your technical proficiencies (comma separated).</p>
             </div>
 
             <div className="space-y-4">
                 {categories.map(({ key, label, placeholder }) => (
                     <div key={key} className="space-y-1.5">
-                        <label className="text-[11px] font-bold text-neutral-400 uppercase tracking-widest pl-1">{label}</label>
+                        <label className="text-[11px] font-bold text-slate-500 uppercase tracking-widest pl-1">{label}</label>
                         <textarea
                             value={liveCvData.skills[key]?.join(", ") || ""}
                             onChange={(e) => handleChange(key, e.target.value)}
                             placeholder={placeholder}
-                            className="w-full min-h-[60px] bg-white/5 border border-white/10 rounded-xl p-4 text-sm text-white focus:outline-none focus:border-rose-400 focus:ring-1 focus:ring-rose-400 resize-y"
+                            className="w-full min-h-[60px] bg-white shadow-sm border border-slate-200 rounded-xl p-4 text-sm text-slate-900 focus:outline-none  resize-y"
                         />
                     </div>
                 ))}

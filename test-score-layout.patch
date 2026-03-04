@@ -1,0 +1,3 @@
+--- src/app/score/[id]/page.tsx
++++ src/app/score/[id]/page.tsx
+@@ -1,114 +1,38 @@

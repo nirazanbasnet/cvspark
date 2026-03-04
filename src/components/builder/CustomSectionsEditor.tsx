@@ -53,11 +53,11 @@ export function CustomSectionsEditor({
                         <FilePlus2 className="w-6 h-6 text-rose-400" />
                         Custom Sections
                     </h2>
-                    <p className="text-neutral-400 text-sm">Add bespoke categories like Certifications or Languages.</p>
+                    <p className="text-slate-500 text-sm">Add bespoke categories like Certifications or Languages.</p>
                 </div>
                 <button
                     onClick={addSection}
-                    className="text-xs font-bold bg-white text-black px-4 py-2 rounded-lg flex items-center gap-2 hover:bg-neutral-200 transition-colors shadow-sm"
+                    className="text-xs font-bold bg-slate-900 text-white px-4 py-2 rounded-lg flex items-center gap-2 hover:bg-slate-800 transition-colors shadow-sm"
                 >
                     <Plus className="w-4 h-4" /> Add Section
                 </button>
@@ -68,28 +68,28 @@ export function CustomSectionsEditor({
                     const isExpanded = expandedSections.includes(secIdx);
 
                     return (
-                        <div key={secIdx} className="bg-white/5 border border-white/10 rounded-2xl overflow-hidden transition-all duration-300">
+                        <div key={secIdx} className="bg-white shadow-sm border border-slate-200 rounded-2xl overflow-hidden transition-all duration-300">
                             <div
                                 className={cn(
-                                    "p-5 flex items-center justify-between cursor-pointer transition-colors hover:bg-white/5",
-                                    isExpanded ? "bg-white/5 border-b border-white/5" : ""
+                                    "p-5 flex items-center justify-between cursor-pointer transition-colors hover:bg-slate-50",
+                                    isExpanded ? "bg-white shadow-sm border-b border-slate-200" : ""
                                 )}
                                 onClick={() => toggleSection(secIdx)}
                             >
                                 <div className="flex-1">
-                                    <h3 className="text-lg font-bold text-white flex items-center gap-2">
+                                    <h3 className="text-lg font-bold text-slate-900 flex items-center gap-2">
                                         {section.title || "Untitled Section"}
                                     </h3>
                                 </div>
                                 <div className="flex items-center gap-3">
                                     <button
                                         onClick={(e) => { e.stopPropagation(); removeSection(secIdx); }}
-                                        className="p-2 text-neutral-500 hover:text-rose-400 hover:bg-rose-500/10 rounded-lg transition-colors"
+                                        className="p-2 text-slate-500 hover:text-slate-700 hover:text-rose-400 hover:bg-rose-100 rounded-lg transition-colors"
                                     >
                                         <Trash2 className="w-4 h-4" />
                                     </button>
-                                    <div className="p-1 rounded-full bg-white/10">
-                                        {isExpanded ? <ChevronUp className="w-5 h-5 text-white" /> : <ChevronDown className="w-5 h-5 text-white" />}
+                                    <div className="p-1 rounded-full bg-slate-100">
+                                        {isExpanded ? <ChevronUp className="w-5 h-5 text-slate-900" /> : <ChevronDown className="w-5 h-5 text-slate-900" />}
                                     </div>
                                 </div>
                             </div>
@@ -97,27 +97,27 @@ export function CustomSectionsEditor({
                             {isExpanded && (
                                 <div className="p-6 space-y-6">
                                     <div className="space-y-1.5">
-                                        <label className="text-[11px] font-bold text-neutral-400 uppercase tracking-widest pl-1">Section Title</label>
+                                        <label className="text-[11px] font-bold text-slate-500 uppercase tracking-widest pl-1">Section Title</label>
                                         <input
                                             type="text"
                                             value={section.title || ""}
                                             onChange={(e) => updateSectionTitle(secIdx, e.target.value)}
-                                            className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-2.5 text-sm font-bold text-rose-300 focus:outline-none focus:border-rose-400 focus:ring-1 focus:ring-rose-400"
+                                            className="w-full bg-white shadow-sm border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none "
                                         />
                                     </div>
-                                    <div className="space-y-4 pt-4 border-t border-white/5">
-                                        <label className="text-[11px] font-bold text-neutral-400 uppercase tracking-widest pl-1 flex items-center gap-2">
+                                    <div className="space-y-4 pt-4 border-t border-slate-200">
+                                        <label className="text-[11px] font-bold text-slate-500 uppercase tracking-widest pl-1 flex items-center gap-2">
                                             Section Items
                                         </label>
                                         {section.items.map((item, itemIdx) => (
-                                            <div key={itemIdx} className="bg-black/20 p-4 rounded-xl border border-white/5 relative group">
+                                            <div key={itemIdx} className="bg-slate-50 p-4 rounded-xl border border-slate-200 relative group">
                                                 <button
                                                     onClick={() => {
                                                         const newSections = [...(liveCvData.customSections || [])];
                                                         newSections[secIdx].items.splice(itemIdx, 1);
                                                         setLiveCvData({ ...liveCvData, customSections: newSections });
                                                     }}
-                                                    className="absolute top-4 right-4 p-1.5 text-neutral-500 hover:text-rose-400 hover:bg-rose-500/10 rounded-md transition-colors opacity-0 group-hover:opacity-100"
+                                                    className="absolute top-4 right-4 p-1.5 text-slate-500 hover:text-slate-700 hover:text-rose-400 hover:bg-rose-100 rounded-md transition-colors opacity-0 group-hover:opacity-100"
                                                     title="Remove Item"
                                                 >
                                                     <Trash2 className="w-3.5 h-3.5" />
@@ -125,7 +125,7 @@ export function CustomSectionsEditor({
 
                                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4 pr-8">
                                                     <div className="space-y-1.5">
-                                                        <label className="text-[11px] font-bold text-neutral-400 uppercase tracking-widest pl-1">Heading / Title</label>
+                                                        <label className="text-[11px] font-bold text-slate-500 uppercase tracking-widest pl-1">Heading / Title</label>
                                                         <input
                                                             type="text"
                                                             value={item.heading || ""}
@@ -134,11 +134,11 @@ export function CustomSectionsEditor({
                                                                 newSections[secIdx].items[itemIdx].heading = e.target.value;
                                                                 setLiveCvData({ ...liveCvData, customSections: newSections });
                                                             }}
-                                                            className="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-rose-400 focus:ring-1 focus:ring-rose-400"
+                                                            className="w-full bg-white shadow-sm border border-slate-200 rounded-xl px-3 py-2 text-sm text-slate-900 focus:outline-none "
                                                         />
                                                     </div>
                                                     <div className="space-y-1.5">
-                                                        <label className="text-[11px] font-bold text-neutral-400 uppercase tracking-widest pl-1">Date / Duration</label>
+                                                        <label className="text-[11px] font-bold text-slate-500 uppercase tracking-widest pl-1">Date / Duration</label>
                                                         <input
                                                             type="text"
                                                             value={item.date || ""}
@@ -147,11 +147,11 @@ export function CustomSectionsEditor({
                                                                 newSections[secIdx].items[itemIdx].date = e.target.value;
                                                                 setLiveCvData({ ...liveCvData, customSections: newSections });
                                                             }}
-                                                            className="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-rose-400 focus:ring-1 focus:ring-rose-400"
+                                                            className="w-full bg-white shadow-sm border border-slate-200 rounded-xl px-3 py-2 text-sm text-slate-900 focus:outline-none "
                                                         />
                                                     </div>
                                                     <div className="space-y-1.5 md:col-span-2">
-                                                        <label className="text-[11px] font-bold text-neutral-400 uppercase tracking-widest pl-1">Subheading</label>
+                                                        <label className="text-[11px] font-bold text-slate-500 uppercase tracking-widest pl-1">Subheading</label>
                                                         <input
                                                             type="text"
                                                             value={item.subheading || ""}
@@ -160,11 +160,11 @@ export function CustomSectionsEditor({
                                                                 newSections[secIdx].items[itemIdx].subheading = e.target.value;
                                                                 setLiveCvData({ ...liveCvData, customSections: newSections });
                                                             }}
-                                                            className="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-rose-400 focus:ring-1 focus:ring-rose-400"
+                                                            className="w-full bg-white shadow-sm border border-slate-200 rounded-xl px-3 py-2 text-sm text-slate-900 focus:outline-none "
                                                         />
                                                     </div>
                                                     <div className="space-y-1.5 md:col-span-2">
-                                                        <label className="text-[11px] font-bold text-neutral-400 uppercase tracking-widest pl-1">Description (Inline Info)</label>
+                                                        <label className="text-[11px] font-bold text-slate-500 uppercase tracking-widest pl-1">Description (Inline Info)</label>
                                                         <textarea
                                                             value={item.description || ""}
                                                             onChange={(e) => {
@@ -172,17 +172,17 @@ export function CustomSectionsEditor({
                                                                 newSections[secIdx].items[itemIdx].description = e.target.value;
                                                                 setLiveCvData({ ...liveCvData, customSections: newSections });
                                                             }}
-                                                            className="w-full min-h-[60px] bg-black/40 border border-white/10 rounded-xl p-3 text-sm text-white focus:outline-none focus:border-rose-400 focus:ring-1 focus:ring-rose-400 resize-y"
+                                                            className="w-full min-h-[60px] bg-white shadow-sm border border-slate-200 rounded-xl p-3 text-sm text-slate-900 focus:outline-none  resize-y"
                                                         />
                                                     </div>
                                                 </div>
 
-                                                <label className="text-[11px] font-bold text-neutral-400 uppercase tracking-widest pl-1 mb-2 block">Bullet Points</label>
+                                                <label className="text-[11px] font-bold text-slate-500 uppercase tracking-widest pl-1 mb-2 block">Bullet Points</label>
                                                 <div className="space-y-2">
                                                     {(item.bullets || []).map((bullet, bIdx) => (
                                                         <div key={bIdx} className="flex gap-2 group/bullet relative">
                                                             <textarea
-                                                                className="flex-1 min-h-[40px] bg-black/40 border border-white/10 rounded-xl p-3 text-sm text-white focus:outline-none focus:border-rose-400 focus:ring-1 focus:ring-rose-400 resize-y"
+                                                                className="flex-1 min-h-[40px] bg-white shadow-sm border border-slate-200 rounded-xl p-3 text-sm text-slate-900 focus:outline-none  resize-y"
                                                                 value={bullet}
                                                                 onChange={(e) => {
                                                                     const newSections = [...(liveCvData.customSections || [])];
@@ -197,7 +197,7 @@ export function CustomSectionsEditor({
                                                                     newSections[secIdx].items[itemIdx].bullets!.splice(bIdx, 1);
                                                                     setLiveCvData({ ...liveCvData, customSections: newSections });
                                                                 }}
-                                                                className="p-2 text-neutral-500 hover:text-rose-400 hover:bg-rose-500/10 rounded-lg transition-colors"
+                                                                className="p-2 text-slate-500 hover:text-slate-700 hover:text-rose-400 hover:bg-rose-100 rounded-lg transition-colors"
                                                             >
                                                                 <Trash2 className="w-4 h-4" />
                                                             </button>
@@ -210,7 +210,7 @@ export function CustomSectionsEditor({
                                                             newSections[secIdx].items[itemIdx].bullets!.push("");
                                                             setLiveCvData({ ...liveCvData, customSections: newSections });
                                                         }}
-                                                        className="mt-2 w-full py-2 border border-dashed border-white/10 rounded-xl text-neutral-500 text-sm font-medium hover:border-white/30 hover:text-neutral-300 transition-all flex justify-center items-center gap-2"
+                                                        className="mt-2 w-full py-2 border border-dashed border-slate-200 rounded-xl text-slate-500 hover:text-slate-700 text-sm font-medium hover:border-white/30 hover:text-slate-600 transition-all flex justify-center items-center gap-2"
                                                     >
                                                         <Plus className="w-4 h-4" /> Add Bullet Message
                                                     </button>
@@ -224,7 +224,7 @@ export function CustomSectionsEditor({
                                                 newSections[secIdx].items.push({ heading: "", subheading: "", date: "", description: "", bullets: [""] });
                                                 setLiveCvData({ ...liveCvData, customSections: newSections });
                                             }}
-                                            className="mt-4 w-full py-3 border border-dashed border-rose-500/30 rounded-xl text-rose-400 text-sm font-bold hover:bg-rose-500/10 hover:border-rose-500/50 transition-all flex justify-center items-center gap-2 bg-rose-500/5"
+                                            className="mt-4 w-full py-3 border border-dashed border-rose-200 rounded-xl text-rose-400 text-sm font-bold hover:bg-rose-100 hover:border-rose-300 transition-all flex justify-center items-center gap-2 bg-rose-50"
                                         >
                                             <Plus className="w-4 h-4" /> Add Item to {section.title || "Section"}
                                         </button>

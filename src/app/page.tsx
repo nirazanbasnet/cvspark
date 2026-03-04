@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { UploadCloud, Loader2, Sparkles, ArrowRight, Database } from "lucide-react";
+import { UploadCloud, Loader2, Sparkles, ArrowRight } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useCvContext } from "@/context/CvContext";
 import { motion } from "framer-motion";
@@ -11,7 +11,7 @@ export default function Home() {
   const [file, setFile] = useState<File | null>(null);
   const [loading, setLoading] = useState(false);
   const [loadingText, setLoadingText] = useState("Analyzing Architectural Density...");
-  const { cvs, addCv, deleteCv, isLoaded } = useCvContext();
+  const { addCv } = useCvContext();
   const [errorMsg, setErrorMsg] = useState("");
   const router = useRouter();
 

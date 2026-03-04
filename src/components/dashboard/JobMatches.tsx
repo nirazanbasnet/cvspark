@@ -34,6 +34,7 @@ export const JobMatches: React.FC<JobMatchesProps> = ({ resumeText, primaryRole 
         if (isLoaded && isSignedIn && resumeText && !hasScanned && !loading) {
             fetchMatches();
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [resumeText, hasScanned, isSignedIn, isLoaded]);
 
     const fetchMatches = async () => {
@@ -119,7 +120,7 @@ export const JobMatches: React.FC<JobMatchesProps> = ({ resumeText, primaryRole 
                                 <Briefcase className="h-10 w-10 text-slate-400 mx-auto mb-3" />
                                 <h3 className="text-lg font-semibold text-slate-700">No strong matches right now</h3>
                                 <p className="text-slate-500 text-sm mt-1 max-w-md mx-auto">
-                                    We couldn't find available jobs that closely align with your current resume. Check back later or adjust your resume targeting.
+                                    We couldn&apos;t find available jobs that closely align with your current resume. Check back later or adjust your resume targeting.
                                 </p>
                             </div>
                         )}
@@ -151,7 +152,7 @@ export const JobMatches: React.FC<JobMatchesProps> = ({ resumeText, primaryRole 
 
                                     <div className="p-4 pt-4 flex-1">
                                         <div className="mb-4">
-                                            <h4 className="text-xs font-semibold uppercase tracking-wider text-rose-500 mb-1.5">Why it's a match</h4>
+                                            <h4 className="text-xs font-semibold uppercase tracking-wider text-rose-500 mb-1.5">Why it&apos;s a match</h4>
                                             <p className="text-sm text-slate-700 bg-rose-50 p-3 rounded-md border border-rose-100 leading-relaxed">
                                                 {match.reason}
                                             </p>

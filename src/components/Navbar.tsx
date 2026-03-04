@@ -5,16 +5,14 @@ import { useState } from 'react';
 import { Database, Menu, X } from 'lucide-react';
 import { SignInButton, SignedIn, SignedOut, UserButton } from '@clerk/nextjs';
 import Link from 'next/link';
-import router from 'next/router';
+import { useRouter } from 'next/navigation';
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
+    const router = useRouter();
 
     const navItems = [
-        { label: 'Platform', href: '#' },
-        { label: 'Solutions', href: '#' },
-        { label: 'Resources', href: '#' },
-        { label: 'Pricing', href: '#' },
+        { label: 'Dashboard', href: '/dashboard' },
     ];
 
     return (
@@ -35,8 +33,8 @@ const Navbar = () => {
                     </motion.div>
                 </Link>
 
-                {/* Desktop Navigation */}
-                <div className="hidden items-center gap-8">
+                {/* Desktop Auth */}
+                <div className="hidden md:flex items-center gap-4">
                     {navItems.map((item) => (
                         <motion.a
                             key={item.label}
@@ -48,12 +46,8 @@ const Navbar = () => {
                             {item.label}
                         </motion.a>
                     ))}
-                </div>
-
-                {/* Desktop Auth */}
-                <div className="hidden md:flex items-center gap-4">
                     {/* Top action bar */}
-                    <div className="">
+                    <div>
                         <button onClick={() => router.push('/dashboard/scraper')} className="flex items-center gap-2 bg-white border border-slate-200 px-4 py-2 rounded-xl text-sm font-semibold text-slate-700 hover:bg-slate-50 hover:scale-105 transition-all outline-none shadow-sm">
                             <Database className="w-4 h-4 text-blue-500" />
                             Scraper Database
@@ -113,7 +107,7 @@ const Navbar = () => {
                             </a>
                         ))}
                         {/* Top action bar */}
-                        <div className="">
+                        <div>
                             <button onClick={() => router.push('/dashboard/scraper')} className="flex items-center gap-2 bg-white border border-slate-200 px-4 py-2 rounded-xl text-sm font-semibold text-slate-700 hover:bg-slate-50 hover:scale-105 transition-all outline-none shadow-sm">
                                 <Database className="w-4 h-4 text-blue-500" />
                                 Scraper Database

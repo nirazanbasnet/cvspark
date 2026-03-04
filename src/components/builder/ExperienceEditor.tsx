@@ -152,11 +152,11 @@ export function ExperienceEditor({
                         <Briefcase className="w-6 h-6 text-rose-400" />
                         Professional Experience
                     </h2>
-                    <p className="text-neutral-400 text-sm">Add roles and let AI optimize your bullet formatting.</p>
+                    <p className="text-slate-500 text-sm">Add roles and let AI optimize your bullet formatting.</p>
                 </div>
                 <button
                     onClick={addExperience}
-                    className="text-xs font-bold bg-white text-black px-4 py-2 rounded-lg flex items-center gap-2 hover:bg-neutral-200 transition-colors shadow-sm"
+                    className="text-xs font-bold bg-slate-900 text-white px-4 py-2 rounded-lg flex items-center gap-2 hover:bg-slate-800 transition-colors shadow-sm"
                 >
                     <Plus className="w-4 h-4" /> Add Role
                 </button>
@@ -167,33 +167,33 @@ export function ExperienceEditor({
                     const isExpanded = expandedBlocks.includes(expIndex);
 
                     return (
-                        <div key={expIndex} className="bg-white/5 border border-white/10 rounded-2xl overflow-hidden transition-all duration-300">
+                        <div key={expIndex} className="bg-white shadow-sm border border-slate-200 rounded-2xl overflow-hidden transition-all duration-300">
                             {/* Accordion Header */}
                             <div
                                 className={cn(
-                                    "p-5 flex items-center justify-between cursor-pointer transition-colors hover:bg-white/5",
-                                    isExpanded ? "bg-white/5 border-b border-white/5" : ""
+                                    "p-5 flex items-center justify-between cursor-pointer transition-colors hover:bg-slate-50",
+                                    isExpanded ? "bg-white shadow-sm border-b border-slate-200" : ""
                                 )}
                                 onClick={() => toggleBlock(expIndex)}
                             >
                                 <div className="flex-1">
-                                    <h3 className="text-lg font-bold text-white flex items-center gap-2">
+                                    <h3 className="text-lg font-bold text-slate-900 flex items-center gap-2">
                                         {exp.role || "Untitled Role"}
-                                        <span className="text-xs font-medium px-2 py-0.5 rounded-full bg-white/10 text-neutral-300">
+                                        <span className="text-xs font-medium px-2 py-0.5 rounded-full bg-slate-100 text-slate-600">
                                             {exp.company || "Company"}
                                         </span>
                                     </h3>
-                                    <div className="text-sm text-neutral-400 mt-0.5">{exp.duration || "Duration"}</div>
+                                    <div className="text-sm text-slate-500 mt-0.5">{exp.duration || "Duration"}</div>
                                 </div>
                                 <div className="flex items-center gap-3">
                                     <button
                                         onClick={(e) => { e.stopPropagation(); removeExperience(expIndex); }}
-                                        className="p-2 text-neutral-500 hover:text-rose-400 hover:bg-rose-500/10 rounded-lg transition-colors"
+                                        className="p-2 text-slate-500 hover:text-slate-700 hover:text-rose-400 hover:bg-rose-100 rounded-lg transition-colors"
                                     >
                                         <Trash2 className="w-4 h-4" />
                                     </button>
-                                    <div className="p-1 rounded-full bg-white/10">
-                                        {isExpanded ? <ChevronUp className="w-5 h-5 text-white" /> : <ChevronDown className="w-5 h-5 text-white" />}
+                                    <div className="p-1 rounded-full bg-slate-100">
+                                        {isExpanded ? <ChevronUp className="w-5 h-5 text-slate-900" /> : <ChevronDown className="w-5 h-5 text-slate-900" />}
                                     </div>
                                 </div>
                             </div>
@@ -204,39 +204,39 @@ export function ExperienceEditor({
                                     {/* Edit Role Meta */}
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                         <div className="space-y-1.5 md:col-span-2">
-                                            <label className="text-[11px] font-bold text-neutral-400 uppercase tracking-widest pl-1">Job Title</label>
+                                            <label className="text-[11px] font-bold text-slate-500 uppercase tracking-widest pl-1">Job Title</label>
                                             <input
                                                 type="text"
                                                 value={exp.role}
                                                 onChange={(e) => handleExpChange(expIndex, "role", e.target.value)}
-                                                className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-rose-400 focus:ring-1 focus:ring-rose-400"
+                                                className="w-full bg-white shadow-sm border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none "
                                             />
                                         </div>
                                         <div className="space-y-1.5">
-                                            <label className="text-[11px] font-bold text-neutral-400 uppercase tracking-widest pl-1">Company</label>
+                                            <label className="text-[11px] font-bold text-slate-500 uppercase tracking-widest pl-1">Company</label>
                                             <input
                                                 type="text"
                                                 value={exp.company}
                                                 onChange={(e) => handleExpChange(expIndex, "company", e.target.value)}
-                                                className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-rose-400 focus:ring-1 focus:ring-rose-400"
+                                                className="w-full bg-white shadow-sm border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none "
                                             />
                                         </div>
                                         <div className="space-y-1.5">
-                                            <label className="text-[11px] font-bold text-neutral-400 uppercase tracking-widest pl-1">Duration</label>
+                                            <label className="text-[11px] font-bold text-slate-500 uppercase tracking-widest pl-1">Duration</label>
                                             <input
                                                 type="text"
                                                 placeholder="e.g. Oct 2022 - Present"
                                                 value={exp.duration}
                                                 onChange={(e) => handleExpChange(expIndex, "duration", e.target.value)}
-                                                className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-rose-400 focus:ring-1 focus:ring-rose-400"
+                                                className="w-full bg-white shadow-sm border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none "
                                             />
                                         </div>
                                     </div>
 
                                     {/* Flat Bullets Array */}
                                     {(exp.bullets !== undefined || (!exp.bullets && !exp.focusAreas)) && (
-                                        <div className="space-y-3 pt-4 border-t border-white/5">
-                                            <label className="text-[11px] font-bold text-neutral-400 uppercase tracking-widest pl-1 flex items-center gap-2">
+                                        <div className="space-y-3 pt-4 border-t border-slate-200">
+                                            <label className="text-[11px] font-bold text-slate-500 uppercase tracking-widest pl-1 flex items-center gap-2">
                                                 Accomplishments <Sparkles className="w-3 h-3 text-rose-400" />
                                             </label>
 
@@ -248,7 +248,7 @@ export function ExperienceEditor({
                                                     return (
                                                         <div key={`flat-${idx}`} className="flex gap-2 group relative">
                                                             <textarea
-                                                                className="flex-1 min-h-[60px] bg-black/40 border border-white/10 rounded-xl p-3 text-sm text-white focus:outline-none focus:border-rose-400 focus:ring-1 focus:ring-rose-400 resize-y transition-all placeholder:text-white/20 custom-scrollbar"
+                                                                className="flex-1 min-h-[60px] bg-white shadow-sm border border-slate-200 rounded-xl p-3 text-sm text-slate-900 focus:outline-none  resize-y transition-all placeholder:text-slate-400 custom-scrollbar"
                                                                 placeholder="e.g. Increased page load speeds..."
                                                                 value={bullet}
                                                                 onChange={(e) => updateBullet(expIndex, null, idx, e.target.value)}
@@ -257,14 +257,14 @@ export function ExperienceEditor({
                                                                 <button
                                                                     onClick={() => handleImprove(expIndex, null, idx, bullet)}
                                                                     disabled={isLoading || bullet.length < 5}
-                                                                    className="p-2 bg-indigo-500/20 text-indigo-300 hover:bg-indigo-500 hover:text-white rounded-lg transition-all disabled:opacity-50 border border-indigo-500/30"
+                                                                    className="p-2 bg-indigo-100 text-indigo-600 hover:bg-indigo-500 hover:text-slate-900 rounded-lg transition-all disabled:opacity-50 border border-indigo-200"
                                                                     title="AI Optimize"
                                                                 >
                                                                     {isLoading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Wand2 className="w-4 h-4" />}
                                                                 </button>
                                                                 <button
                                                                     onClick={() => removeBullet(expIndex, null, idx)}
-                                                                    className="p-2 text-neutral-500 hover:text-rose-400 hover:bg-rose-500/10 rounded-lg transition-colors"
+                                                                    className="p-2 text-slate-500 hover:text-slate-700 hover:text-rose-400 hover:bg-rose-100 rounded-lg transition-colors"
                                                                 >
                                                                     <Trash2 className="w-4 h-4" />
                                                                 </button>
@@ -277,7 +277,7 @@ export function ExperienceEditor({
                                                 <button
                                                     onClick={() => handleSuggest(expIndex, null)}
                                                     disabled={loadingIndices[`${expIndex}-null-suggest`]}
-                                                    className="flex-1 py-3 bg-indigo-500/10 border border-indigo-500/30 rounded-xl text-indigo-300 text-sm font-bold hover:bg-indigo-500 hover:text-white transition-all flex justify-center items-center gap-2 disabled:opacity-50"
+                                                    className="flex-1 py-3 bg-indigo-50 border border-indigo-200 rounded-xl text-indigo-600 text-sm font-bold hover:bg-indigo-500 hover:text-slate-900 transition-all flex justify-center items-center gap-2 disabled:opacity-50"
                                                 >
                                                     {loadingIndices[`${expIndex}-null-suggest`] ? (
                                                         <Loader2 className="w-4 h-4 animate-spin" />
@@ -288,7 +288,7 @@ export function ExperienceEditor({
                                                 </button>
                                                 <button
                                                     onClick={() => addBullet(expIndex, null)}
-                                                    className="w-12 flex justify-center items-center rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 transition-all text-neutral-400"
+                                                    className="w-12 flex justify-center items-center rounded-xl bg-white shadow-sm border border-slate-200 hover:bg-slate-100 transition-all text-slate-500"
                                                     title="Add Manual Bullet"
                                                 >
                                                     <Plus className="w-5 h-5" />
@@ -299,14 +299,14 @@ export function ExperienceEditor({
 
                                     {/* Focus Areas (If the CV uses them) */}
                                     {(exp.focusAreas || []).map((area, areaIndex) => (
-                                        <div key={areaIndex} className="space-y-3 pt-4 border-t border-white/5 bg-black/20 p-4 rounded-xl relative group">
+                                        <div key={areaIndex} className="space-y-3 pt-4 border-t border-slate-200 bg-slate-50 p-4 rounded-xl relative group">
                                             <button
                                                 onClick={() => {
                                                     const newExp = [...liveCvData.experience];
                                                     newExp[expIndex].focusAreas!.splice(areaIndex, 1);
                                                     setLiveCvData({ ...liveCvData, experience: newExp });
                                                 }}
-                                                className="absolute top-4 right-4 p-1.5 text-neutral-500 hover:text-rose-400 hover:bg-rose-500/10 rounded-md transition-colors opacity-0 group-hover:opacity-100"
+                                                className="absolute top-4 right-4 p-1.5 text-slate-500 hover:text-slate-700 hover:text-rose-400 hover:bg-rose-100 rounded-md transition-colors opacity-0 group-hover:opacity-100"
                                                 title="Remove Task/Project Area"
                                             >
                                                 <Trash2 className="w-3.5 h-3.5" />
@@ -321,7 +321,7 @@ export function ExperienceEditor({
                                                     setLiveCvData({ ...liveCvData, experience: newExp });
                                                 }}
                                                 placeholder="Task/Project Title (e.g. Payment API Integration)"
-                                                className="w-full pr-8 bg-transparent border-b border-white/10 px-1 py-1 text-sm font-bold text-rose-300 focus:outline-none focus:border-rose-400 mb-2 transition-colors placeholder:text-rose-300/30"
+                                                className="w-full pr-8 bg-transparent border-b border-slate-200 px-1 py-1 text-sm font-bold text-rose-600 focus:outline-none focus:border-rose-400 mb-2 transition-colors placeholder:text-rose-400"
                                             />
 
                                             <div className="space-y-3">
@@ -332,7 +332,7 @@ export function ExperienceEditor({
                                                     return (
                                                         <div key={`area-${idx}`} className="flex gap-2 group/bullet relative">
                                                             <textarea
-                                                                className="flex-1 min-h-[60px] bg-black/40 border border-white/10 rounded-xl p-3 text-sm text-white focus:outline-none focus:border-rose-400 focus:ring-1 focus:ring-rose-400 resize-y transition-all placeholder:text-white/20 custom-scrollbar"
+                                                                className="flex-1 min-h-[60px] bg-white shadow-sm border border-slate-200 rounded-xl p-3 text-sm text-slate-900 focus:outline-none  resize-y transition-all placeholder:text-slate-400 custom-scrollbar"
                                                                 placeholder="e.g. Managed payment gateways..."
                                                                 value={bullet}
                                                                 onChange={(e) => updateBullet(expIndex, areaIndex, idx, e.target.value)}
@@ -341,14 +341,14 @@ export function ExperienceEditor({
                                                                 <button
                                                                     onClick={() => handleImprove(expIndex, areaIndex, idx, bullet)}
                                                                     disabled={isLoading || bullet.length < 5}
-                                                                    className="p-2 bg-indigo-500/20 text-indigo-300 hover:bg-indigo-500 hover:text-white rounded-lg transition-all disabled:opacity-50 border border-indigo-500/30"
+                                                                    className="p-2 bg-indigo-100 text-indigo-600 hover:bg-indigo-500 hover:text-slate-900 rounded-lg transition-all disabled:opacity-50 border border-indigo-200"
                                                                     title="AI Optimize"
                                                                 >
                                                                     {isLoading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Wand2 className="w-4 h-4" />}
                                                                 </button>
                                                                 <button
                                                                     onClick={() => removeBullet(expIndex, areaIndex, idx)}
-                                                                    className="p-2 text-neutral-500 hover:text-rose-400 hover:bg-rose-500/10 rounded-lg transition-colors"
+                                                                    className="p-2 text-slate-500 hover:text-slate-700 hover:text-rose-400 hover:bg-rose-100 rounded-lg transition-colors"
                                                                 >
                                                                     <Trash2 className="w-4 h-4" />
                                                                 </button>
@@ -361,7 +361,7 @@ export function ExperienceEditor({
                                                 <button
                                                     onClick={() => handleSuggest(expIndex, areaIndex)}
                                                     disabled={loadingIndices[`${expIndex}-${areaIndex}-suggest`]}
-                                                    className="flex-1 py-2 bg-indigo-500/10 border border-indigo-500/30 rounded-xl text-indigo-300 text-sm font-bold hover:bg-indigo-500 hover:text-white transition-all flex justify-center items-center gap-2 disabled:opacity-50"
+                                                    className="flex-1 py-2 bg-indigo-50 border border-indigo-200 rounded-xl text-indigo-600 text-sm font-bold hover:bg-indigo-500 hover:text-slate-900 transition-all flex justify-center items-center gap-2 disabled:opacity-50"
                                                 >
                                                     {loadingIndices[`${expIndex}-${areaIndex}-suggest`] ? (
                                                         <Loader2 className="w-4 h-4 animate-spin" />
@@ -372,7 +372,7 @@ export function ExperienceEditor({
                                                 </button>
                                                 <button
                                                     onClick={() => addBullet(expIndex, areaIndex)}
-                                                    className="px-4 flex justify-center items-center rounded-xl bg-black/40 border border-white/10 hover:bg-white/10 transition-all text-neutral-400"
+                                                    className="px-4 flex justify-center items-center rounded-xl bg-white shadow-sm border border-slate-200 hover:bg-slate-100 transition-all text-slate-500"
                                                     title="Add Manual Bullet"
                                                 >
                                                     <Plus className="w-4 h-4" />
@@ -388,7 +388,7 @@ export function ExperienceEditor({
                                             newExp[expIndex].focusAreas!.push({ heading: "", bullets: [] });
                                             setLiveCvData({ ...liveCvData, experience: newExp });
                                         }}
-                                        className="mt-6 w-full py-3 border border-dashed border-rose-500/30 rounded-xl text-rose-400 text-sm font-bold hover:bg-rose-500/10 hover:border-rose-500/50 transition-all flex justify-center items-center gap-2 bg-rose-500/5"
+                                        className="mt-6 w-full py-3 border border-dashed border-rose-200 rounded-xl text-rose-400 text-sm font-bold hover:bg-rose-100 hover:border-rose-300 transition-all flex justify-center items-center gap-2 bg-rose-50"
                                     >
                                         <Plus className="w-4 h-4" /> Add Task / Project Area
                                     </button>

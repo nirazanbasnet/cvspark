@@ -17,7 +17,7 @@ export function ActionableAdvice({ advice }: { advice: string[] }) {
                     <div key={index} className="p-5 bg-gradient-to-br from-white/5 to-transparent border border-white/10 rounded-xl relative overflow-hidden group">
                         <div className="absolute top-0 left-0 w-1 h-full bg-amber-400/50 transform origin-left transition-transform group-hover:scale-y-110"></div>
                         <p className="text-sm text-white/80 leading-relaxed font-medium">
-                            "{tip}"
+                            &quot;{tip}&quot;
                         </p>
                     </div>
                 ))}

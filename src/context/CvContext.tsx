@@ -58,7 +58,7 @@ export function CvProvider({ children }: { children: React.ReactNode }) {
         async function loadCvs() {
             try {
                 const storedCvs: StoredCV[] = [];
-                await cvStore.iterate((value: StoredCV, key: string) => {
+                await cvStore.iterate((value: StoredCV) => {
                     storedCvs.push(value);
                 });
                 // Sort by newest first
