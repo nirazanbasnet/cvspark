@@ -14,7 +14,7 @@ export async function POST(req: Request) {
 You are an expert executive resume writer.
 The user has provided their professional experience background below in JSON form.
 Your task is to write a highly compelling, ATS-optimized "Professional Summary" paragraph.
-CRITICAL CONSTRAINT: The summary MUST be strictly between 50 and 80 words long. This is a hard limit.
+CRITICAL CONSTRAINT: The summary MUST be strictly between 80 and 100 words long. This is a hard limit.
 It should perfectly capture their career trajectory, key skills, and greatest impacts based *only* on the provided experience.
 Do not use generic buzzwords; focus on concrete achievements, leadership qualities, and core technologies mentioned.
 

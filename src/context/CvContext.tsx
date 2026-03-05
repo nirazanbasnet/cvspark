@@ -27,6 +27,7 @@ export interface StoredCV {
     id: string;
     fileName: string;
     uploadDate: number;
+    lastUpdated?: number;
     analysisData: AnalysisData;
     cvData: GoldStandardResume;
 }
@@ -102,7 +103,10 @@ export function CvProvider({ children }: { children: React.ReactNode }) {
         try {
             const existingCv = await cvStore.getItem<StoredCV>(id);
             if (existingCv) {
-                const updatedCv = { ...existingCv, cvData: updatedCvData };
+                const nameBase = (updatedCvData.basics?.name || 'document').toLowerCase().replace(/\\s+/g, '_');
+                const newFileName = `${nameBase}_cvspark.pdf`;
+
+                const updatedCv = { ...existingCv, cvData: updatedCvData, lastUpdated: Date.now(), fileName: newFileName };
                 await cvStore.setItem(id, updatedCv);
                 setCvs(prev => prev.map(cv => cv.id === id ? updatedCv : cv));
             }
@@ -116,7 +120,10 @@ export function CvProvider({ children }: { children: React.ReactNode }) {
         try {
             const existingCv = await cvStore.getItem<StoredCV>(id);
             if (existingCv) {
-                const updatedCv = { ...existingCv, analysisData, cvData };
+                const nameBase = (cvData.basics?.name || 'document').toLowerCase().replace(/\\s+/g, '_');
+                const newFileName = `${nameBase}_cvspark.pdf`;
+
+                const updatedCv = { ...existingCv, analysisData, cvData, lastUpdated: Date.now(), fileName: newFileName };
                 await cvStore.setItem(id, updatedCv);
                 setCvs(prev => prev.map(cv => cv.id === id ? updatedCv : cv));
             }

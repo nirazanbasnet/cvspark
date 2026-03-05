@@ -1,11 +1,9 @@
 import { NextResponse } from 'next/server';
-import { Groq } from 'groq-sdk';
+import { groq } from '@/lib/groq';
 import fs from 'fs';
 import path from 'path';
 
-const groq = new Groq({
-    apiKey: process.env.GROQ_API_KEY,
-});
+export const maxDuration = 60;
 
 export async function POST(req: Request) {
     try {
@@ -36,7 +34,8 @@ export async function POST(req: Request) {
 
         // Prepare a concise version of the jobs for the prompt
         // We only send id, title, company, and description to reduce token usage
-        const promptJobs = allJobs.map((job: any) => ({
+        // Limit to 40 jobs to prevent Groq API rate limits (TPM) and context errors
+        const promptJobs = allJobs.slice(0, 40).map((job: any) => ({
             id: job.id,
             title: job.title,
             company: job.company,

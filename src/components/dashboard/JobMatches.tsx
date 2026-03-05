@@ -74,7 +74,7 @@ export const JobMatches: React.FC<JobMatchesProps> = ({ resumeText, primaryRole 
         <div>
             <div className="flex items-center justify-between mb-4">
                 <div>
-                    <h2 className="text-xl font-bold flex items-center gap-2">
+                    <h2 className="text-xl font-bold flex items-center gap-2 text-black">
                         <Briefcase className="h-5 w-5 text-primary" />
                         Job Matches
                     </h2>

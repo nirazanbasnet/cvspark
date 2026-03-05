@@ -2,7 +2,7 @@
 
 import { useCvContext } from "@/context/CvContext";
 import { useRouter } from "next/navigation";
-import { Database, FileText, Trash2, ArrowLeft } from "lucide-react";
+import { Database, FileText, Trash2, ArrowLeft, Target } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import {
     AlertDialog,
@@ -35,6 +35,16 @@ export default function DashboardPage() {
                         </h1>
                         <p className="text-sm text-slate-500 font-medium">Manage and review your CV analysis reports.</p>
                     </div>
+
+                    <div className="ml-auto">
+                        <button
+                            onClick={() => router.push('/jd-analyzer')}
+                            className="bg-white border-2 border-slate-200 text-slate-700 font-bold text-sm px-5 py-2.5 rounded-xl flex items-center gap-3 hover:border-blue-500 hover:text-blue-600 hover:shadow-md transition-all group"
+                        >
+                            <Target className="w-5 h-5 text-slate-400 group-hover:text-blue-500 transition-colors" />
+                            Use JD Analyzer
+                        </button>
+                    </div>
                 </div>
 
                 {!isLoaded ? (
@@ -52,79 +62,99 @@ export default function DashboardPage() {
                         </button>
                     </div>
                 ) : (
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                        {cvs.map(cv => (
-                            <div key={cv.id} className="group bg-white border border-slate-200 hover:border-blue-300 hover:shadow-lg hover:shadow-blue-500/10 rounded-2xl p-6 transition-all flex flex-col relative overflow-hidden cursor-pointer" onClick={() => router.push(`/score/${cv.id}`)}>
-                                <div className="flex items-start justify-between mb-4 relative z-10">
-                                    <div className="flex items-center gap-4 w-full pr-8">
-                                        <div className="w-12 h-12 rounded-xl bg-blue-50 text-blue-500 flex items-center justify-center shrink-0 border border-blue-100/50">
-                                            <FileText className="w-6 h-6" />
-                                        </div>
-                                        <div className="flex-1 min-w-0">
-                                            <h3 className="font-bold text-slate-800 line-clamp-2 text-sm leading-tight">{cv.fileName}</h3>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        {cvs.map(cv => {
+                            const name = cv.cvData?.basics?.name || cv.fileName.replace(/\\.[^/.]+$/, "");
+                            const role = cv.cvData?.basics?.label || cv.analysisData?.roleCategory || 'Role Unknown';
+                            const title = `${name} - ${role}`;
+                            const isLatest = !!cv.lastUpdated;
+
+                            return (
+                                <div key={cv.id} className="group bg-white border border-slate-200 hover:border-blue-300 hover:shadow-lg hover:shadow-blue-500/10 rounded-2xl p-6 transition-all flex flex-col relative overflow-hidden cursor-pointer" onClick={() => router.push(`/score/${cv.id}`)}>
+                                    <div className="flex items-start justify-between mb-4 relative z-10">
+                                        <div className="flex items-start gap-4 w-full pr-8">
+                                            <div className="w-12 h-12 rounded-xl bg-blue-50 text-blue-500 flex items-center justify-center shrink-0 border border-blue-100/50 mt-1">
+                                                <FileText className="w-6 h-6" />
+                                            </div>
+                                            <div className="flex-1 min-w-0">
+                                                <h3 className="font-bold text-slate-800 line-clamp-2 text-base leading-tight mb-2" title={title}>{title}</h3>
+                                                <div className="flex items-center gap-2">
+                                                    {isLatest ? (
+                                                        <span className="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-bold tracking-wide uppercase bg-blue-100 text-blue-700">Latest</span>
+                                                    ) : (
+                                                        <span className="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-bold tracking-wide uppercase bg-slate-100 text-slate-600">Draft</span>
+                                                    )}
+                                                    <span className="text-xs text-slate-500 font-medium">
+                                                        Updated {new Date(cv.lastUpdated || cv.uploadDate).toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' })}
+                                                    </span>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
 
-                                <div className="space-y-4 relative z-10 mt-auto pt-4">
-                                    <div className="bg-slate-50 rounded-xl p-3 border border-slate-100 flex items-center justify-between">
-                                        <span className="text-[10px] uppercase font-bold tracking-widest text-slate-400">Date</span>
-                                        <span className="text-xs font-semibold text-slate-700">
-                                            {new Date(cv.uploadDate).toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' })}
-                                        </span>
-                                    </div>
+                                    <div className="space-y-4 relative z-10 mt-auto pt-4 border-t border-slate-100">
+                                        {cv.analysisData?.score ? (
+                                            <div className="flex items-center justify-between">
+                                                <span className="text-xs font-semibold text-slate-500">Readiness Score</span>
+                                                <span className="text-sm font-black text-emerald-600">
+                                                    {cv.analysisData.score} / 100
+                                                </span>
+                                            </div>
+                                        ) : (
+                                            <div className="flex items-center justify-between">
+                                                <span className="text-xs font-semibold text-slate-500">Analysis Status</span>
+                                                <span className="text-sm font-black text-amber-600">Pending</span>
+                                            </div>
+                                        )}
 
-                                    {cv.analysisData?.score ? (
-                                        <div className="bg-emerald-50 rounded-xl p-3 border border-emerald-100 flex items-center justify-between">
-                                            <span className="text-[10px] uppercase font-bold tracking-widest text-emerald-600">Score</span>
-                                            <span className="text-sm font-black text-emerald-700">
-                                                {cv.analysisData.score} / 100
-                                            </span>
-                                        </div>
-                                    ) : (
-                                        <div className="bg-amber-50 rounded-xl p-3 border border-amber-100 flex items-center justify-between">
-                                            <span className="text-[10px] uppercase font-bold tracking-widest text-amber-600">Status</span>
-                                            <span className="text-sm font-black text-amber-700">Pending</span>
-                                        </div>
-                                    )}
-                                </div>
-
-                                {/* Delete Button */}
-                                <AlertDialog>
-                                    <AlertDialogTrigger asChild>
                                         <button
                                             onClick={(e) => {
                                                 e.stopPropagation();
+                                                router.push(`/builder?id=${cv.id}`);
                                             }}
-                                            className="absolute top-4 right-4 p-2 text-slate-300 hover:text-red-500 hover:bg-red-50 rounded-xl opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-all z-20"
-                                            title="Delete Report"
+                                            className="cursor-pointer w-full mt-2 bg-slate-50 hover:bg-blue-50 text-slate-700 hover:text-blue-700 font-semibold py-2.5 rounded-xl transition-colors border border-slate-200 hover:border-blue-200 text-sm flex items-center justify-center gap-2"
                                         >
-                                            <Trash2 className="w-4 h-4 md:w-5 md:h-5" />
+                                            Edit CV
                                         </button>
-                                    </AlertDialogTrigger>
-                                    <AlertDialogContent onClick={(e) => e.stopPropagation()}>
-                                        <AlertDialogHeader>
-                                            <AlertDialogTitle className="text-black">Are you absolutely sure?</AlertDialogTitle>
-                                            <AlertDialogDescription>
-                                                This action cannot be undone. This will permanently delete this document and its associated analysis.
-                                            </AlertDialogDescription>
-                                        </AlertDialogHeader>
-                                        <AlertDialogFooter>
-                                            <AlertDialogCancel className="text-black" onClick={(e) => e.stopPropagation()}>Cancel</AlertDialogCancel>
-                                            <AlertDialogAction
+                                    </div>
+
+                                    {/* Delete Button */}
+                                    <AlertDialog>
+                                        <AlertDialogTrigger asChild>
+                                            <button
                                                 onClick={(e) => {
                                                     e.stopPropagation();
-                                                    deleteCv(cv.id);
                                                 }}
-                                                className="bg-red-600 text-white hover:bg-red-700 focus:ring-red-600"
+                                                className="cursor-pointer absolute top-4 right-4 p-2 text-slate-300 hover:text-red-500 hover:bg-red-50 rounded-xl opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-all z-20"
+                                                title="Delete Report"
                                             >
-                                                Delete
-                                            </AlertDialogAction>
-                                        </AlertDialogFooter>
-                                    </AlertDialogContent>
-                                </AlertDialog>
-                            </div>
-                        ))}
+                                                <Trash2 className="w-4 h-4 md:w-5 md:h-5" />
+                                            </button>
+                                        </AlertDialogTrigger>
+                                        <AlertDialogContent onClick={(e) => e.stopPropagation()}>
+                                            <AlertDialogHeader>
+                                                <AlertDialogTitle className="text-black">Are you absolutely sure?</AlertDialogTitle>
+                                                <AlertDialogDescription>
+                                                    This action cannot be undone. This will permanently delete this document and its associated analysis.
+                                                </AlertDialogDescription>
+                                            </AlertDialogHeader>
+                                            <AlertDialogFooter>
+                                                <AlertDialogCancel className="cursor-pointer text-black" onClick={(e) => e.stopPropagation()}>Cancel</AlertDialogCancel>
+                                                <AlertDialogAction
+                                                    onClick={(e) => {
+                                                        e.stopPropagation();
+                                                        deleteCv(cv.id);
+                                                    }}
+                                                    className="cursor-pointer bg-red-600 text-white hover:bg-red-700 focus:ring-red-600"
+                                                >
+                                                    Delete
+                                                </AlertDialogAction>
+                                            </AlertDialogFooter>
+                                        </AlertDialogContent>
+                                    </AlertDialog>
+                                </div>
+                            )
+                        })}
                     </div>
                 )}
             </div>

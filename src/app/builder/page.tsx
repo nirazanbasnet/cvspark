@@ -20,7 +20,7 @@ import {
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { useCvContext } from "@/context/CvContext";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { GoldStandardResume } from "@/types/resume";
 
 import { BasicsEditor } from "@/components/builder/BasicsEditor";
@@ -33,6 +33,7 @@ import { CustomSectionsEditor } from "@/components/builder/CustomSectionsEditor"
 function BuilderContent() {
     const searchParams = useSearchParams();
     const id = searchParams.get("id");
+    const router = useRouter();
     const { cvs, updateCvData, getPdfBlob } = useCvContext();
     const cv = cvs.find(c => c.id === id);
 
@@ -64,6 +65,7 @@ function BuilderContent() {
         try {
             setIsSaving(true);
             await updateCvData(cv.id, liveCvData);
+            router.push(`/score/${cv.id}?justSaved=true`);
         } catch (err) {
             console.error("Failed to save CV:", err);
             alert("Failed to save changes.");
@@ -175,11 +177,81 @@ function BuilderContent() {
                                 const element = document.getElementById('cv-pdf-content');
                                 if (!element) return;
 
+                                // Fetch and sanitize all styles asynchronously before cloning
+                                let sanitizedCss = '';
+                                try {
+                                    const styleTags = Array.from(document.querySelectorAll('style'));
+                                    for (const tag of styleTags) {
+                                        sanitizedCss += tag.innerHTML + '\\n';
+                                    }
+
+                                    const linkTags = Array.from(document.querySelectorAll('link[rel="stylesheet"]'));
+                                    for (const link of linkTags) {
+                                        const href = (link as HTMLLinkElement).href;
+                                        if (href) {
+                                            const res = await fetch(href);
+                                            if (res.ok) {
+                                                sanitizedCss += await res.text() + '\\n';
+                                            }
+                                        }
+                                    }
+                                    sanitizedCss = sanitizedCss.replace(/\boklch\b/gi, 'rgb').replace(/\blab\b/gi, 'rgb').replace(/\boklab\b/gi, 'rgb').replace(/\blch\b/gi, 'rgb');
+                                } catch (e) {
+                                    console.warn("Failed to fetch some stylesheets", e);
+                                }
+
                                 const opt = {
                                     margin: 0,
-                                    filename: `${liveCvData.basics.name.replace(/\s+/g, '_')}_CV.pdf`,
+                                    filename: `${(liveCvData.basics?.name || 'document').toLowerCase().replace(/\\s+/g, '_')}_cvspark.pdf`,
                                     image: { type: 'jpeg', quality: 0.98 },
-                                    html2canvas: { scale: 2, useCORS: true },
+                                    html2canvas: {
+                                        scale: 2,
+                                        useCORS: true,
+                                        onclone: (doc: any) => {
+                                            // Remove original tags that could crash html2canvas
+                                            const elementsToRemove = doc.querySelectorAll('style, link[rel="stylesheet"]');
+                                            elementsToRemove.forEach((e: any) => e.remove());
+
+                                            // Aggressively strip any inline styles using new color functions
+                                            const allElements = doc.querySelectorAll('*');
+                                            allElements.forEach((el: any) => {
+                                                if (el.style && el.style.cssText) {
+                                                    let css = el.style.cssText;
+                                                    if (css.includes('oklch') || css.includes('lab') || css.includes('lch')) {
+                                                        el.style.cssText = css
+                                                            .replace(/\boklch\b/gi, 'rgb')
+                                                            .replace(/\blab\b/gi, 'rgb')
+                                                            .replace(/\boklab\b/gi, 'rgb')
+                                                            .replace(/\blch\b/gi, 'rgb');
+                                                    }
+                                                }
+                                            });
+
+                                            // Inject the monolithic, sanitized CSS
+                                            const baseStyle = doc.createElement('style');
+                                            baseStyle.innerHTML = sanitizedCss;
+                                            doc.head.appendChild(baseStyle);
+
+                                            // Inject explict color fallbacks for our specific classes
+                                            const customStyle = doc.createElement('style');
+                                            customStyle.innerHTML =
+                                                ".text-slate-900 {color: #0f172a !important; }\\n" +
+                                                ".text-slate-700 {color: #334155 !important; }\\n" +
+                                                ".text-slate-500 {color: #64748b !important; }\\n" +
+                                                ".text-blue-600 {color: #2563eb !important; }\\n" +
+                                                ".text-blue-700 {color: #1d4ed8 !important; }\\n" +
+                                                ".text-blue-500 {color: #3b82f6 !important; }\\n" +
+                                                ".text-white {color: #ffffff !important; }\\n" +
+                                                ".bg-white {background-color: #ffffff !important; }\\n" +
+                                                ".bg-blue-600 {background-color: #2563eb !important; }\\n" +
+                                                ".bg-slate-50 {background-color: #f8fafc !important; }\\n" +
+                                                ".bg-slate-100 {background-color: #f1f5f9 !important; }\\n" +
+                                                ".border-slate-200 {border-color: #e2e8f0 !important; }\\n" +
+                                                ".border-slate-300 {border-color: #cbd5e1 !important; }\\n" +
+                                                ".border-blue-400 {border-color: #60a5fa !important; }";
+                                            doc.head.appendChild(customStyle);
+                                        }
+                                    },
                                     jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
                                 };
 
@@ -210,8 +282,8 @@ function BuilderContent() {
                     </div>
                 </div>
 
-            </main>
-        </div>
+            </main >
+        </div >
     );
 }
 
